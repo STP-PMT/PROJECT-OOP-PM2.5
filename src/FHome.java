@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.Button;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,54 +15,70 @@ public class FHome extends JFrame {
     private final int X_WIDTH = 1038;
     private final int Y_HIGTH = 715;
 
+    private JPanel panel;
+
     public FHome() {
-        setPreferredSize(new Dimension(X_WIDTH, Y_HIGTH));
-        setMinimumSize(new Dimension(X_WIDTH, Y_HIGTH));
-        pack();
+        setSize(X_WIDTH, Y_HIGTH);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        // setResizable(false);
-        setBackground(new Color(255, 0, 0));
-
+        setResizable(false);
     }
 
     public void setPButton() {
-        JPanel p1 = new JPanel(null);
-        p1.setSize(370, 292);
-        p1.setLocation(630, 365);
-        p1.setBackground(new Color(255, 0, 0));
+        panel = new JPanel(null);
+        panel.setBounds(630, 365, 370, 292);
+        panel.setBackground(new Color(255, 0, 0));
+
         Button b1 = new Button("Home");
         Button b2 = new Button("Home");
-        b1.setSize(350, 130);
-        b1.setLocation(10, 10);
-        b2.setSize(350, 130);
-        b2.setLocation(10, 150);
-        p1.add(b1);
-        p1.add(b2);
-        add(p1);
+
+        b1.setBounds(20, 20, 330, 120);
+        b2.setBounds(20, 160, 330, 112);
+
+        panel.add(b1);
+        panel.add(b2);
+        add(panel);
     }
 
     public void setPLogo() {
-        JPanel p1 = new JPanel(null);
-        p1.setSize(370, 331);
-        p1.setLocation(630, 20);
-        p1.setBackground(new Color(255, 0, 0));
-        add(p1);
+        panel = new JPanel(null);
+        panel.setBounds(630, 20, 370, 325);
+        panel.setBackground(new Color(255, 0, 0));
+        add(panel);
     }
 
-    public void setPShow(){
-        JPanel p1 = new JPanel(null);
-        p1.setSize(588, 450);
-        p1.setLocation(20, 20);
-        p1.setBackground(new Color(255, 0, 0));
-        add(p1);
+    public void setPShow() {
+        panel = new JPanel(null);
+        panel.setBounds(20, 20, 588, 450);
+        panel.setBackground(new Color(255, 0, 0));
+        add(panel);
     }
-    public void setPButton2(){
-        JPanel p1 = new JPanel(null);
-        p1.setSize(588, 166);
-        p1.setLocation(20, 490);
-        p1.setBackground(new Color(255, 0, 0));
-        add(p1);
+
+    public void setPButton2() {
+        panel = new JPanel(null);
+        panel.setBounds(20, 490, 588, 166);
+        panel.setBackground(new Color(255, 0, 0));
+
+        JButton b1 = new JButton(new ImageIcon("src\\image\\p1.png"));
+        b1.setBounds(20, 20, 125, 125);
+        panel.add(b1);
+        JButton b2 = new JButton(new ImageIcon("src\\image\\p2.png"));
+        b2.setBounds(162, 20, 125, 125);
+        panel.add(b2);
+        JButton b3 = new JButton(new ImageIcon("src\\image\\p3.png"));
+        b3.setBounds(299, 20, 125, 125);
+        panel.add(b3);
+        JButton b4 = new JButton(new ImageIcon("src\\image\\p4.png"));
+        b4.setBounds(436, 20, 125, 125);
+        panel.add(b4);
+
+        add(panel);
+    }
+
+    public JPanel setPanel(int XL, int YL, int XW, int YH) {
+        JPanel panel = new JPanel(null);
+        panel.setBounds(XL, YL, XW, YH);
+        return panel;
     }
 }
