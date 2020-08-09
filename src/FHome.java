@@ -58,7 +58,7 @@ public class FHome extends JFrame {
     public void setPButton2() {
         panel = new JPanel(null);
         panel.setBounds(20, 490, 588, 166);
-        panel.setBackground(new Color(255, 0, 0));
+        panel.setBackground(new Color(0, 0, 255));
 
         JButton b1 = new JButton(new ImageIcon("src\\image\\p1.png"));
         b1.setBounds(20, 20, 125, 125);
