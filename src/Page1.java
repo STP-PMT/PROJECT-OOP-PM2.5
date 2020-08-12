@@ -20,8 +20,6 @@ public class Page1 extends MyPanel {
                 removeAll();
                 add(setFrame2());
                 setVisible(true);
-                //repaint();
-                
             }
         });
 
