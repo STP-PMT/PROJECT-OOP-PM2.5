@@ -17,7 +17,7 @@ public class MyFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout());
-        setResizable(true);
+        setResizable(false);
         getContentPane().setBackground(new Color(39, 54, 73));
         setIcon();
     }

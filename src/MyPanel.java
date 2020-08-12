@@ -89,6 +89,12 @@ public class MyPanel extends JPanel {
         this.button.setBounds(Xl, Yl, X, Y);
     }
 
+    public void setButton(int Xl, int Yl, int X, int Y,String name,int size) {
+        this.button = new JButton(name);
+        this.button.setFont(new Font(name,Font.BOLD,size));
+        this.button.setBounds(Xl, Yl, X, Y);
+    }
+
     public void setLabel(int Xl, int Yl, int X, int Y, String text,int size) {
         this.label = new JLabel(text);
         this.label.setBounds(Xl, Yl, X, Y);
@@ -103,6 +109,20 @@ public class MyPanel extends JPanel {
     public void setTaggleButton(int Xl, int Yl, int X, int Y, String name) {
         toggleButton = new JToggleButton(name);
         toggleButton.setBounds(Xl, Yl, X, Y);
+    }
+
+    public void setTaggleButton(int Xl, int Yl, int X, int Y, String name,int size) {
+        toggleButton = new JToggleButton(name);
+        toggleButton.setFont(new Font(name,Font.BOLD,size));
+        toggleButton.setBounds(Xl, Yl, X, Y);
+    }
+
+    public JToggleButton getToggleButton(){
+        return this.toggleButton;
+    }
+
+    public JButton getButton(){
+        return this.button;
     }
 
 }
