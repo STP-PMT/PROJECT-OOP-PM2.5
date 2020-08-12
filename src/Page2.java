@@ -44,10 +44,10 @@ public class Page2 extends MyPanel {
         setButton(220, 105, 140, 30, "OK");
         panel.add(button);
 
-        setButton(15, 150, 170, 90, "SELECL");
-        panel.add(button);
-        setButton(190, 150, 170, 90, "SELECL");
-        panel.add(button);
+        setTaggleButton(15, 150, 170, 90, "SELECL");
+        panel.add(toggleButton);
+        setTaggleButton(190, 150, 170, 90, "SELECL");
+        panel.add(toggleButton);
 
         add(panel);
     }

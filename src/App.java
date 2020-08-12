@@ -1,13 +1,11 @@
 
 public class App {
     public static void main(String[] args) throws Exception {
-        //MyFrame frame1 = new MyFrame();
-        MyFrame frame2 = new MyFrame();
+        MyFrame frame = new MyFrame();
+        //setFrame1(frame);
+        setFrame2(frame);
 
-        //setFrame1(frame1);
-        setFrame2(frame2);
-        //frame1.setVisible(true);
-        frame2.setVisible(true);
+        frame.setVisible(true);
     }
 
     public static void setFrame1(MyFrame frame) {
@@ -21,7 +19,6 @@ public class App {
 
     public static void setFrame2(MyFrame frame) {
         Page2 page2 = new Page2();
-        //page2.setLayout(new BoxLayout(page2,BoxLayout.Y_AXIS));
         page2.Frame1();
         page2.Frame2();
         page2.Frame3();

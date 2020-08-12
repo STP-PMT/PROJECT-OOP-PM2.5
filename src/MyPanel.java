@@ -5,9 +5,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+
 import java.awt.Font;
 import java.awt.Insets;
-
 
 public class MyPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -19,6 +20,7 @@ public class MyPanel extends JPanel {
     protected JButton button;
     protected JTextField textField;
     protected Insets insets;
+    protected JToggleButton toggleButton;
 
     public MyPanel() {
         setSize(X_WIDTH, Y_HIGTH);
@@ -29,16 +31,16 @@ public class MyPanel extends JPanel {
     public void setPanel(int Xl, int Yl, int X, int Y, int r, int g, int b) {
         insets = this.getInsets();
         this.panel = new JPanel(null);
-        this.panel.setBounds(Xl+ insets.left, Yl+insets.right, X+insets.top, Y+insets.bottom);
+        this.panel.setBounds(Xl, Yl, X, Y);
         this.panel.setBackground(new Color(r, g, b));
-        repaint();
+        this.repaint();
     }
 
     public void setPanel(int Xl, int Yl, int X, int Y) {
         this.panel = new JPanel(null);
-        this.panel.setBounds(Xl+ insets.left, Yl+insets.right, X+insets.top, Y+insets.bottom);
+        this.panel.setBounds(Xl, Yl, X, Y);
         this.panel.setBackground(new Color(0, 174, 169));
-        repaint();
+        this.repaint();
     }
 
     public JPanel getPanel() {
@@ -46,8 +48,8 @@ public class MyPanel extends JPanel {
     }
 
     public void setImagetoButton(int Xl, int Yl, int X, int Y, String Url) {
-        button = new JButton(new ImageIcon(Url));
-        button.setBounds(Xl, Yl, X, Y);
+        this.button = new JButton(new ImageIcon(Url));
+        this.button.setBounds(Xl, Yl, X, Y);
     }
 
     public JButton getImagetoButton() {
@@ -55,32 +57,46 @@ public class MyPanel extends JPanel {
     }
 
     public void setImagetoPanel(int Xl, int Yl, int X, int Y, String Url) {
-        label = new JLabel(new ImageIcon(Url));
-        label.setBounds(Xl, Yl, X, Y);
+        this.label = new JLabel(new ImageIcon(Url));
+        this.label.setBounds(Xl, Yl, X, Y);
     }
 
     public JLabel getImagetoPanel() {
         return this.label;
     }
 
-    public void setTextFeild(int Xl, int Yl, int X, int Y){
-        textField = new JTextField();
-        textField.setBounds(Xl, Yl, X, Y);
+    public void setTextFeild(int Xl, int Yl, int X, int Y) {
+        this.textField = new JTextField();
+        this.textField.setBounds(Xl, Yl, X, Y);
     }
 
-    public void setButton(int Xl, int Yl, int X, int Y,String name){
-        button = new JButton(name);
-        button.setBounds(Xl, Yl, X, Y);
+    public JTextField getTextFeild() {
+        return textField;
     }
 
-    public void setButton(int Xl, int Yl, int X, int Y){
-        button = new JButton();
-        button.setBounds(Xl, Yl, X, Y);
+    public void setButton(int Xl, int Yl, int X, int Y, String name) {
+        this.button = new JButton(name);
+        this.button.setBounds(Xl, Yl, X, Y);
     }
 
-    public void setLabel(int Xl, int Yl, int X, int Y,String text,int font){
-        label = new JLabel(text);
-        label.setBounds(Xl, Yl, X, Y);
-        label.setFont(new Font(text, Font.PLAIN, font));
+    public void setButton(int Xl, int Yl, int X, int Y) {
+        this.button = new JButton();
+        this.button.setBounds(Xl, Yl, X, Y);
+    }
+
+    public void setLabel(int Xl, int Yl, int X, int Y, String text, int font) {
+        this.label = new JLabel(text);
+        this.label.setBounds(Xl, Yl, X, Y);
+        this.label.setFont(new Font(text, Font.PLAIN, font));
+    }
+
+    public void setTaggleButton(int Xl, int Yl, int X, int Y) {
+        toggleButton = new JToggleButton();
+        toggleButton.setBounds(Xl, Yl, X, Y);
+    }
+
+    public void setTaggleButton(int Xl, int Yl, int X, int Y,String name) {
+        toggleButton = new JToggleButton(name);
+        toggleButton.setBounds(Xl, Yl, X, Y);
     }
 }
