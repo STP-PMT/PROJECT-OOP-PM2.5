@@ -1,10 +1,9 @@
-
+import java.awt.Font;
 public class App {
     public static void main(String[] args) throws Exception {
         MyFrame frame = new MyFrame();
-        //setFrame1(frame);
-        setFrame2(frame);
-
+        setFrame1(frame);
+        //setFrame2(frame);
         frame.setVisible(true);
     }
 
@@ -25,5 +24,4 @@ public class App {
         page2.Frame4();
         frame.add(page2);
     }
-
 }

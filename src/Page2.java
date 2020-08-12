@@ -1,4 +1,5 @@
 import java.awt.GridLayout;
+import java.awt.Font;
 import javax.swing.JButton;
 
 public class Page2 extends MyPanel {
@@ -16,37 +17,48 @@ public class Page2 extends MyPanel {
     }
 
     public void Frame2() {
+        //add selecl file
         setPanel(20, 490, 588, 166);
+        setLabel(15,15,100,30,"Selecl File :",15);
+        panel.add(label);
+        setTextFeild(105, 15, 325, 30);
+        panel.add(textField);
+        setButton(435, 15, 80, 30, "SELECL");
+        panel.add(button);
+        setButton(518, 15, 55, 30, "OK");
+        panel.add(button);
+
+        //add people
+        setLabel(15,55,100,30,"Population :",15);
+        panel.add(label);
+        setTextFeild(105,55, 325, 30);
+        panel.add(textField);
+        setButton(435, 55, 138, 30, "OK");
+        panel.add(button);
+
+        //
+        setLabel(15,95,100,30,"Random     :",15);
+        panel.add(label);
+        setTextFeild(105,95, 325, 30);
+        panel.add(textField);
+        setButton(435, 95, 138, 30, "OK");
+        panel.add(button);
+
         add(panel);
     }
 
     public void Frame3() {
         setPanel(630, 20, 370, 325);
+        
         add(panel);
     }
 
     public void Frame4() {
-        setPanel(630, 365, 370, 292);
-        setTextFeild(15, 25, 200, 30);
-        panel.add(textField);
-        setButton(220, 25, 80, 30, "SELECL");
-        panel.add(button);
-        setButton(305, 25, 55, 30, "OK");
-        panel.add(button);
-
-        setTextFeild(15,65, 200, 30);
-        panel.add(textField);
-        setButton(220, 65, 140, 30, "OK");
-        panel.add(button);
-
-        setTextFeild(15,105, 200, 30);
-        panel.add(textField);
-        setButton(220, 105, 140, 30, "OK");
-        panel.add(button);
-
-        setTaggleButton(15, 150, 170, 90, "SELECL");
+        setPanel(630, 490, 370, 166);
+        
+        setTaggleButton(15, 15, 166, 140,"SELECL");
         panel.add(toggleButton);
-        setTaggleButton(190, 150, 170, 90, "SELECL");
+        setTaggleButton(190, 15, 166, 140, "SELECL");
         panel.add(toggleButton);
 
         add(panel);

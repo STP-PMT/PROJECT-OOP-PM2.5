@@ -8,7 +8,11 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Insets;
+
+import java.io.File;
+import java.io.IOException;
 
 public class MyPanel extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -21,6 +25,7 @@ public class MyPanel extends JPanel {
     protected JTextField textField;
     protected Insets insets;
     protected JToggleButton toggleButton;
+    protected Font font;
 
     public MyPanel() {
         setSize(X_WIDTH, Y_HIGTH);
@@ -84,10 +89,10 @@ public class MyPanel extends JPanel {
         this.button.setBounds(Xl, Yl, X, Y);
     }
 
-    public void setLabel(int Xl, int Yl, int X, int Y, String text, int font) {
+    public void setLabel(int Xl, int Yl, int X, int Y, String text,int size) {
         this.label = new JLabel(text);
         this.label.setBounds(Xl, Yl, X, Y);
-        this.label.setFont(new Font(text, Font.PLAIN, font));
+        this.label.setFont(new Font(text, Font.BOLD, size));
     }
 
     public void setTaggleButton(int Xl, int Yl, int X, int Y) {
@@ -95,8 +100,9 @@ public class MyPanel extends JPanel {
         toggleButton.setBounds(Xl, Yl, X, Y);
     }
 
-    public void setTaggleButton(int Xl, int Yl, int X, int Y,String name) {
+    public void setTaggleButton(int Xl, int Yl, int X, int Y, String name) {
         toggleButton = new JToggleButton(name);
         toggleButton.setBounds(Xl, Yl, X, Y);
     }
+
 }
