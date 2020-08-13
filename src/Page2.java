@@ -54,7 +54,10 @@ public class Page2 extends MyPanel implements ActionListener{
 
     public void Frame3() {
         setPanel(630, 20, 370, 450);
-
+        setTextAarea(15,15,340,200,"ประชากร\t:\nปริมาณฝุ่น\t:\nสุขภาพดี\t:\nป่วย\t:\nร้อยละของประชากรที่ป่วย :");
+        panel.add(textArea);
+        setImagetoPanel(15,230, 340, 200, "src\\image\\K1.png");
+        panel.add(label);
         add(panel);
     }
 

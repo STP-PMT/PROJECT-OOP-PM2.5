@@ -16,10 +16,11 @@ public class MyFrame extends JFrame {
         setTitle("PM 2.5");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout());
-        setResizable(false);
+        setLayout(null);
+        setResizable(true);
         getContentPane().setBackground(new Color(39, 54, 73));
         setIcon();
+        setLocationRelativeTo(null);
     }
 
     public void setIcon() {

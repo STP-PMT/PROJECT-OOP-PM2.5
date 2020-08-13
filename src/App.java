@@ -6,6 +6,7 @@ public class App {
         MyFrame frame = new MyFrame();
         frame.add(setFrame1());
         frame.setVisible(true);
+        
     }
 
     public static JPanel setFrame1() {
@@ -17,3 +18,4 @@ public class App {
         return page1;
     }
 }
+

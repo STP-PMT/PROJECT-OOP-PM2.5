@@ -4,11 +4,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.TextArea;
 
 
 
@@ -24,6 +26,7 @@ public class MyPanel extends JPanel {
     protected Insets insets;
     protected JToggleButton toggleButton;
     protected Font font;
+    protected TextArea textArea;
 
     public MyPanel() {
         setSize(X_WIDTH, Y_HIGTH);
@@ -121,6 +124,12 @@ public class MyPanel extends JPanel {
 
     public JButton getButton(){
         return this.button;
+    }
+
+    public void  setTextAarea(int Xl, int Yl, int X, int Y,String text){
+        this.textArea = new TextArea(text,X, Y,TextArea.SCROLLBARS_NONE);
+        this.textArea.setBounds(Xl, Yl, X, Y);
+        this.textArea.setFont(new Font(text,Font.PLAIN,18));
     }
 
 }
