@@ -4,7 +4,7 @@ public class App {
     
     public static void main(String[] args) throws Exception {
         MyFrame frame = new MyFrame();
-        frame.add(setFrame1());
+        frame.add(setFrame3());
         frame.setVisible(true);
         
     }
@@ -16,6 +16,12 @@ public class App {
         page1.setPShow();
         page1.setPButton2();
         return page1;
+    }
+
+    public static JPanel setFrame3() {
+        Page3 page3 = new Page3();
+        page3.frame3();
+        return page3;
     }
 }
 
