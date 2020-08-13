@@ -4,26 +4,19 @@ import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Page1 extends MyPanel {
-   
+public class Page1 extends MyPanel implements ActionListener {
+
     private static final long serialVersionUID = 1L;
+    JButton menu1;
 
     public void setButton() {
-        JButton button1;
+
         setPanel(630, 365, 370, 292, 0, 174, 169);
         setImagetoButton(20, 20, 330, 120, "src\\image\\menu1.png");
-        button1 = getButton();
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                removeAll();
-                add(setFrame2());
-                setVisible(true);
-            }
-        });
-
-        panel.add(button);
+        menu1 = getButton();
+        menu1.addActionListener(this);
+        panel.add(menu1);
+        
         setImagetoButton(20, 160, 330, 120, "src\\image\\menu2.png");
         panel.add(button);
         add(panel);
@@ -56,7 +49,7 @@ public class Page1 extends MyPanel {
         add(panel);
     }
 
-    public static JPanel setFrame2() {
+    public static JPanel getFrame2() {
         Page2 page2 = new Page2();
         page2.Frame1();
         page2.Frame2();
@@ -65,12 +58,22 @@ public class Page1 extends MyPanel {
         return page2;
     }
 
-    public static JPanel setFrame1() {
+    public static JPanel getFrame1() {
         Page1 page1 = new Page1();
         page1.setButton();
         page1.setPLogo();
         page1.setPShow();
         page1.setPButton2();
         return page1;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == menu1) {
+            setVisible(false);
+            removeAll();
+            add(getFrame2());
+            setVisible(true);
+        }
     }
 }

@@ -8,11 +8,9 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Insets;
 
-import java.io.File;
-import java.io.IOException;
+
 
 public class MyPanel extends JPanel {
     private static final long serialVersionUID = 1L;

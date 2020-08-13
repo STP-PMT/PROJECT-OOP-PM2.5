@@ -2,13 +2,14 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
-public class Page2 extends MyPanel {
+public class Page2 extends MyPanel implements ActionListener{
 
     private static final long serialVersionUID = 1L;
+    JButton Rain1;
+    int n=2;
 
     public void Frame1() {
         setPanel(20, 20, 588, 450, 39, 54, 73);
@@ -23,11 +24,11 @@ public class Page2 extends MyPanel {
     public void Frame2() {
         // add selecl file
         setPanel(20, 490, 588, 166);
-        setLabel(15, 15, 100, 30, "Selecl File :", 15);
+        setLabel(15, 15, 100, 30, "Select File :", 15);
         panel.add(label);
         setTextFeild(105, 15, 325, 30);
         panel.add(textField);
-        setButton(435, 15, 80, 30, "SELECL");
+        setButton(435, 15, 80, 30, "SELECT");
         panel.add(button);
         setButton(518, 15, 55, 30, "OK");
         panel.add(button);
@@ -52,39 +53,40 @@ public class Page2 extends MyPanel {
     }
 
     public void Frame3() {
-        setPanel(630, 20, 370, 325);
+        setPanel(630, 20, 370, 450);
 
         add(panel);
     }
 
     public void Frame4() {
-        JButton button1;
         JToggleButton button2;
 
         setPanel(630, 490, 370, 166);
 
         setButton(15, 15, 166, 140, "Artificial rain", 15);
-        button1 = getButton();
-        button1.addActionListener(new ActionListener() {
-            int n = 2;
+        Rain1 = getButton();
+        Rain1.addActionListener(this);
+        panel.add(Rain1);
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (n % 2 == 0) {
-                    button1.setBackground(new Color(0, 255, 0));
-                    n++;
-                } else {
-                    button1.setBackground(new Color(255, 255, 255));
-                    n++;
-                }
-            }
-
-        });
-        panel.add(button1);
         setTaggleButton(190, 15, 166, 140, "Natural rain", 15);
         button2 = getToggleButton();
         panel.add(button2);
 
         add(panel);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==Rain1){
+            
+            if (n % 2 == 0) {
+                Rain1.setBackground(new Color(0, 255, 0));
+                n++;
+            } else {
+                Rain1.setBackground(new Color(255, 255, 255));
+                n=2;
+            }
+        }
+
     }
 }
