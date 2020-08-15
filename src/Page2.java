@@ -1,95 +1,199 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class Page2 extends MyPanel implements ActionListener{
+import com.sun.javafx.geom.Edge;
 
-    private static final long serialVersionUID = 1L;
-    JButton Rain1;
-    int n=2;
+public class Page2 extends MyPanel {
 
-    public void Frame1() {
-        setPanel(20, 20, 588, 450, 39, 54, 73);
-        panel.setLayout(new GridLayout(10, 20));
-        button = new JButton();
-        for (int i = 1; i <= 200; i++) {
-            panel.add(new JButton());
-        }
-        add(panel);
-    }
+	private static final long serialVersionUID = 1L;
+	JButton Rain1;
+	JFileChooser chooser = new JFileChooser();
+	FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt File", "txt");
+	JButton btnSeclect;
+	JButton btnOK;
+	JTextField log;
+	File file;
+	int returnVal = 3;
+	JPanel nArea;
 
-    public void Frame2() {
-        // add selecl file
-        setPanel(20, 490, 588, 166);
-        setLabel(15, 15, 100, 30, "Select File :", 15);
-        panel.add(label);
-        setTextFeild(105, 15, 325, 30);
-        panel.add(textField);
-        setButton(435, 15, 80, 30, "SELECT");
-        panel.add(button);
-        setButton(518, 15, 55, 30, "OK");
-        panel.add(button);
+	public void Frame1() {
+		JButton Pbutton;
+		setPanel(20, 20, 588, 450, 39, 54, 73);
+		panel.setLayout(new GridLayout(10, 20));
+		button = new JButton();
+		for (int i = 1; i <= 200; i++) {
+			panel.add(new JButton());
+		}
+		add(panel);
+	}
 
-        // add people
-        setLabel(15, 55, 100, 30, "Population :", 15);
-        panel.add(label);
-        setTextFeild(105, 55, 325, 30);
-        panel.add(textField);
-        setButton(435, 55, 138, 30, "OK");
-        panel.add(button);
+	public void people(ArrayList<Integer> Dust) {
+		setPanel(20, 20, 588, 450, 39, 54, 73);
+		panel.setLayout(new GridLayout(10, 20));
+		System.out.println(Dust.size());
+		JButton[] PArea = new JButton[Dust.size()];
+		for (int i = 0; i < Dust.size(); i++) {
+			PArea[i] = new JButton();
+			if (Dust.get(i) < 100) {
+				PArea[i].setBackground(new Color(0, 255, 0));
+			} else {
+				PArea[i].setBackground(new Color(255, 0, 0));
+			}
+			panel.add(PArea[i]);
+		}
+		add(panel);
+	}
 
-        //
-        setLabel(15, 95, 100, 30, "Random     :", 15);
-        panel.add(label);
-        setTextFeild(105, 95, 325, 30);
-        panel.add(textField);
-        setButton(435, 95, 138, 30, "OK");
-        panel.add(button);
+	public void setPeople() {
+		add(nArea);
+	}
 
-        add(panel);
-    }
+	public void Frame2() {
+		// add select file
+		setPanel(20, 490, 588, 166);
+		setLabel(15, 15, 100, 30, "Select File :", 15);
+		panel.add(label);
+		setTextFeild(105, 15, 325, 30);
+		log = getTextFeild();
+		log.setEditable(false);
+		panel.add(log);
+		setButton(435, 15, 80, 30, "SELECT");
+		btnSeclect = getButton();
+		btnSeclect.addActionListener(new ActionListener() {
 
-    public void Frame3() {
-        setPanel(630, 20, 370, 450);
-        setTextAarea(15,15,340,200,"ประชากร\t:\nปริมาณฝุ่น\t:\nสุขภาพดี\t:\nป่วย\t:\nร้อยละของประชากรที่ป่วย :");
-        panel.add(textArea);
-        setImagetoPanel(15,230, 340, 200, "src\\image\\K5.png");
-        panel.add(label);
-        add(panel);
-    }
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActionSelectFile(e);
+			}
+		});
+		panel.add(btnSeclect);
+		setButton(518, 15, 55, 30, "OK");
+		btnOK = getButton();
+		btnOK.addActionListener(new ActionListener() {
 
-    public void Frame4() {
-        JToggleButton button2;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ActionOKFile(e);
+			}
+		});
+		panel.add(btnOK);
 
-        setPanel(630, 490, 370, 166);
+		// add people
+		setLabel(15, 55, 100, 30, "Population :", 15);
+		panel.add(label);
+		setTextFeild(105, 55, 325, 30);
+		panel.add(textField);
+		setButton(435, 55, 138, 30, "OK");
+		panel.add(button);
 
-        setButton(15, 15, 166, 140, "Artificial rain", 15);
-        Rain1 = getButton();
-        Rain1.addActionListener(this);
-        panel.add(Rain1);
+		//
+		setLabel(15, 95, 100, 30, "Random     :", 15);
+		panel.add(label);
+		setTextFeild(105, 95, 325, 30);
+		panel.add(textField);
+		setButton(435, 95, 138, 30, "OK");
+		panel.add(button);
 
-        setTaggleButton(190, 15, 166, 140, "Natural rain", 15);
-        button2 = getToggleButton();
-        panel.add(button2);
+		add(panel);
+	}
 
-        add(panel);
-    }
+	public void Frame3() {
+		setPanel(630, 20, 370, 450);
+		setTextAarea(15, 15, 340, 200,
+				"population:\nDust volume:\nGood health:\nSick:\nPercentage of population sick :");
+		textArea.setEditable(false);
+		panel.add(textArea);
+		setImagetoPanel(15, 230, 340, 200, "src\\image\\K5.png");
+		panel.add(label);
+		add(panel);
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==Rain1){
-            
-            if (n % 2 == 0) {
-                Rain1.setBackground(new Color(0, 255, 0));
-                n++;
-            } else {
-                Rain1.setBackground(new Color(255, 255, 255));
-                n=2;
-            }
-        }
+	public void Frame4() {
+		JToggleButton button2;
 
-    }
+		setPanel(630, 490, 370, 166);
+
+		setButton(15, 15, 166, 140, "Artificial rain", 15);
+		Rain1 = getButton();
+		// Rain1.addActionListener(this);
+		panel.add(Rain1);
+
+		setTaggleButton(190, 15, 166, 140, "Natural rain", 15);
+		button2 = getToggleButton();
+		panel.add(button2);
+
+		add(panel);
+	}
+
+	private void ActionSelectFile(ActionEvent e) {
+		chooser.setFileFilter(filter);
+		if (e.getSource() == btnSeclect) {
+			returnVal = chooser.showOpenDialog(Page2.this);
+			System.out.println(returnVal);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = chooser.getSelectedFile();
+				log.setText(file.getPath());
+			} else {
+			}
+		}
+
+	}
+
+	private void ActionOKFile(ActionEvent e) {
+		if (returnVal == 0) {
+			file = chooser.getSelectedFile();
+			try {
+				String p = file.getPath();
+				Path path = Paths.get(p);
+				BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+				String line = null;
+				ArrayList<Integer> numDust = new ArrayList<Integer>();
+				Scanner scanner = new Scanner(path);
+				while (scanner.hasNext()) {
+					if (scanner.hasNextInt()) {
+						numDust.add(scanner.nextInt());
+					} else {
+						scanner.next();
+					}
+				}
+				people(numDust);
+				nArea = panel;
+				setVisible(false);
+				removeAll();
+				add(nArea);
+				add(getFrame24());
+				setVisible(true);
+
+				reader.close();
+			} catch (IOException e1) {
+				System.err.println("IOException: " + e1.getMessage());
+			}
+		}
+	}
+
+	public static JPanel getFrame24() {
+		Page2 page2 = new Page2();
+		page2.Frame2();
+		page2.Frame3();
+		page2.Frame4();
+		return page2;
+	}
+
 }

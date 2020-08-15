@@ -4,7 +4,7 @@ public class App {
     
     public static void main(String[] args) throws Exception {
         MyFrame frame = new MyFrame();
-        frame.add(setFrame3());
+        frame.add(setFrame1());
         frame.setVisible(true);
         
     }

@@ -1,4 +1,6 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class MyFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(true);
+        setMinimumSize(new Dimension(X_WIDTH,Y_HIGTH));
         getContentPane().setBackground(new Color(39, 54, 73));
         setIcon();
         setLocationRelativeTo(null);

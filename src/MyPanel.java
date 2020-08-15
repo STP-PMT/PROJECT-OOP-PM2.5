@@ -1,7 +1,9 @@
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -27,6 +29,7 @@ public class MyPanel extends JPanel {
     protected JToggleButton toggleButton;
     protected Font font;
     protected TextArea textArea;
+    JFileChooser fc;
 
     public MyPanel() {
         setSize(X_WIDTH, Y_HIGTH);
@@ -35,11 +38,9 @@ public class MyPanel extends JPanel {
     }
 
     public void setPanel(int Xl, int Yl, int X, int Y, int r, int g, int b) {
-        insets = this.getInsets();
         this.panel = new JPanel(null);
         this.panel.setBounds(Xl, Yl, X, Y);
-        this.panel.setBackground(new Color(r, g, b));
-        this.repaint();
+        panel.setBackground(new Color(r, g, b));
     }
 
     public void setPanel(int Xl, int Yl, int X, int Y) {
@@ -129,7 +130,7 @@ public class MyPanel extends JPanel {
     public void  setTextAarea(int Xl, int Yl, int X, int Y,String text){
         this.textArea = new TextArea(text,X, Y,TextArea.SCROLLBARS_NONE);
         this.textArea.setBounds(Xl, Yl, X, Y);
-        this.textArea.setFont(new Font(text,Font.PLAIN,18));
+        this.textArea.setFont(new Font(text,Font.PLAIN,15));
     }
 
 }
