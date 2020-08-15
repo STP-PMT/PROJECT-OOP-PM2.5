@@ -11,8 +11,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -20,18 +23,22 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.sun.javafx.geom.Edge;
 
+import sun.security.util.Debug;
+
 public class Page2 extends MyPanel {
 
 	private static final long serialVersionUID = 1L;
 	JButton Rain1;
-	JFileChooser chooser = new JFileChooser();
-	FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt File", "txt");
 	JButton btnSeclect;
 	JButton btnOK;
 	JTextField log;
 	File file;
 	int returnVal = 3;
 	JPanel nArea;
+	boolean isOk = false;
+
+	JFileChooser chooser = new JFileChooser();
+	FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt File", "txt");
 
 	public void Frame1() {
 		JButton Pbutton;
@@ -51,7 +58,7 @@ public class Page2 extends MyPanel {
 		JButton[] PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
 			PArea[i] = new JButton();
-			if (Dust.get(i) < 100) {
+			if (Dust.get(i) < 50) {
 				PArea[i].setBackground(new Color(0, 255, 0));
 			} else {
 				PArea[i].setBackground(new Color(255, 0, 0));
@@ -59,10 +66,6 @@ public class Page2 extends MyPanel {
 			panel.add(PArea[i]);
 		}
 		add(panel);
-	}
-
-	public void setPeople() {
-		add(nArea);
 	}
 
 	public void Frame2() {
@@ -132,7 +135,6 @@ public class Page2 extends MyPanel {
 
 		setButton(15, 15, 166, 140, "Artificial rain", 15);
 		Rain1 = getButton();
-		// Rain1.addActionListener(this);
 		panel.add(Rain1);
 
 		setTaggleButton(190, 15, 166, 140, "Natural rain", 15);
@@ -151,6 +153,7 @@ public class Page2 extends MyPanel {
 				File file = chooser.getSelectedFile();
 				log.setText(file.getPath());
 			} else {
+				log.setText("");
 			}
 		}
 
@@ -163,7 +166,6 @@ public class Page2 extends MyPanel {
 				String p = file.getPath();
 				Path path = Paths.get(p);
 				BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-				String line = null;
 				ArrayList<Integer> numDust = new ArrayList<Integer>();
 				Scanner scanner = new Scanner(path);
 				while (scanner.hasNext()) {
@@ -173,11 +175,11 @@ public class Page2 extends MyPanel {
 						scanner.next();
 					}
 				}
-				people(numDust);
-				nArea = panel;
+				
 				setVisible(false);
 				removeAll();
-				add(nArea);
+				people(numDust);
+				add(panel);
 				add(getFrame24());
 				setVisible(true);
 
@@ -185,7 +187,12 @@ public class Page2 extends MyPanel {
 			} catch (IOException e1) {
 				System.err.println("IOException: " + e1.getMessage());
 			}
-		}
+		}else {}
+		
+		log.setEditable(true);
+		log.setText(file.getPath());
+		log.setEditable(false);
+		
 	}
 
 	public static JPanel getFrame24() {
