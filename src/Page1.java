@@ -8,26 +8,46 @@ import java.awt.event.ActionListener;
 public class Page1 extends MyPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	
-	//Attribute method setPanelMenu
+
+	// Attribute method setPanelMenu
 	private JPanel Pmenu;
-	private JButton Bmenu1;
+	private static JButton Bmenu1;
 	private JButton Bmenu2;
-	
-	//Attribute method setPaneLogo
+
+	// Attribute method setPaneLogo
 	private JPanel PLogo;
 	private JLabel LImage;
-	
-	//Attribute method setPaneRain
+
+	// Attribute method setPaneRain
 	private JPanel PRain;
 	private JLabel LGif;
-	
-	//Attribute method setPaneLogo
+
+	// Attribute method setPaneLogo
 	private JPanel PFace;
 	private JButton FaceGreen;
 	private JButton FaceYellow;
 	private JButton FaceOrange;
 	private JButton FaceRad;
+
+	public JPanel getPanelMenu() {
+		return Pmenu;
+	}
+
+	public JPanel getPanelLogo() {
+		return PLogo;
+	}
+
+	public JPanel getPanelRain() {
+		return PRain;
+	}
+
+	public JPanel getPanelFace() {
+		return PFace;
+	}
+	
+	public static JButton getButtonMenu1() {
+		return Bmenu1;
+	}
 
 	public void setPanelMenu() {
 
@@ -101,14 +121,17 @@ public class Page1 extends MyPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == Bmenu1) {
+			/*setVisible(false);
+			remove(getPanelMenu());
+			remove(getPanelLogo());
+			remove(getPanelRain());
+			remove(getPanelFace());
+			add(getFrame2());
+			setVisible(true);*/
+		} /*else if (e.getSource() == Bmenu2) {
 			setVisible(false);
 			removeAll();
 			add(getFrame2());
-			setVisible(true);
-		} else if (e.getSource() == Bmenu2) {
-			setVisible(false);
-			removeAll();
-			add(getFrame2());
-		}
+		}*/
 	}
 }
