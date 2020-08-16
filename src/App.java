@@ -11,10 +11,10 @@ public class App {
 
     public static JPanel setFrame1() {
         Page1 page1 = new Page1();
-        page1.setButton();
-        page1.setPLogo();
-        page1.setPShow();
-        page1.setPButton2();
+        page1.setPanelMenu();
+        page1.setPanelLogo();
+        page1.setPanelRain();
+        page1.setPanelFace();
         return page1;
     }
 

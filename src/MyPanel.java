@@ -36,6 +36,10 @@ public class MyPanel extends JPanel {
         setLayout(null);
         setBackground(new Color(39, 54, 73));
     }
+    
+    public JLabel getLabel() {
+    	return label;
+    }
 
     public void setPanel(int Xl, int Yl, int X, int Y, int r, int g, int b) {
         this.panel = new JPanel(null);
