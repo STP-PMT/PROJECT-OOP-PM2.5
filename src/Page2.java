@@ -21,10 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.sun.javafx.geom.Edge;
-
-import sun.security.util.Debug;
-
 public class Page2 extends MyPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -39,7 +35,12 @@ public class Page2 extends MyPanel {
 
 	JFileChooser chooser = new JFileChooser();
 	FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt File", "txt");
-
+	Page2(){
+		Frame1();
+		Frame2();
+		Frame3();
+		Frame4();
+	}
 	public void Frame1() {
 		JButton Pbutton;
 		setPanel(20, 20, 588, 450, 39, 54, 73);

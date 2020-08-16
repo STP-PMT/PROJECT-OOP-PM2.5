@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class MyFrame extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -17,7 +18,7 @@ public class MyFrame extends JFrame {
         setSize(X_WIDTH, Y_HIGTH);
         setTitle("PM 2.5");
         setLocationRelativeTo(null);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(true);
         setMinimumSize(new Dimension(X_WIDTH,Y_HIGTH));
@@ -32,6 +33,10 @@ public class MyFrame extends JFrame {
             e.printStackTrace();
         }
     }
+    
+    public void setPage() {
+    	
+    }
 
     public int getX_WIDTH(){
         return this.X_WIDTH;
@@ -40,4 +45,14 @@ public class MyFrame extends JFrame {
     public int getY_HIGTH() {
         return this.Y_HIGTH;
     }
+    
+    public static JPanel getFrame2() {
+		Page2 page2 = new Page2();
+		page2.Frame1();
+		page2.Frame2();
+		page2.Frame3();
+		page2.Frame4();
+		return page2;
+	}
+
 }

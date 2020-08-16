@@ -5,14 +5,14 @@ import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Page1 extends MyPanel implements ActionListener {
+public class Page1 extends MyPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	// Attribute method setPanelMenu
 	private JPanel Pmenu;
 	private static JButton Bmenu1;
-	private JButton Bmenu2;
+	private static JButton Bmenu2;
 
 	// Attribute method setPaneLogo
 	private JPanel PLogo;
@@ -28,6 +28,13 @@ public class Page1 extends MyPanel implements ActionListener {
 	private JButton FaceYellow;
 	private JButton FaceOrange;
 	private JButton FaceRad;
+	
+	public Page1(){
+		setPanelMenu();
+		setPanelLogo();
+		setPanelRain();
+		setPanelFace();
+	}
 
 	public JPanel getPanelMenu() {
 		return Pmenu;
@@ -49,6 +56,10 @@ public class Page1 extends MyPanel implements ActionListener {
 		return Bmenu1;
 	}
 
+	public static JButton getButtonMenu2() {
+		return Bmenu2;
+	}
+
 	public void setPanelMenu() {
 
 		setPanel(630, 365, 370, 292, 0, 174, 169);
@@ -57,8 +68,6 @@ public class Page1 extends MyPanel implements ActionListener {
 		Bmenu1 = getButton();
 		setImagetoButton(20, 160, 330, 120, "src\\image\\menu2.png");
 		Bmenu2 = getButton();
-		Bmenu1.addActionListener(this);
-		Bmenu1.addActionListener(this);
 		Pmenu.add(Bmenu2);
 		Pmenu.add(Bmenu1);
 		add(Pmenu);
@@ -116,22 +125,5 @@ public class Page1 extends MyPanel implements ActionListener {
 		page1.setPanelRain();
 		page1.setPanelFace();
 		return page1;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == Bmenu1) {
-			/*setVisible(false);
-			remove(getPanelMenu());
-			remove(getPanelLogo());
-			remove(getPanelRain());
-			remove(getPanelFace());
-			add(getFrame2());
-			setVisible(true);*/
-		} /*else if (e.getSource() == Bmenu2) {
-			setVisible(false);
-			removeAll();
-			add(getFrame2());
-		}*/
 	}
 }

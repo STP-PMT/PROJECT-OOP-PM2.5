@@ -1,5 +1,7 @@
 public class Page3 extends MyPanel {
-
+    Page3(){
+        frame3();
+    }
     public void frame3()
     {
         setPanel(0, 0, 1038, 715, 39, 54, 73);
