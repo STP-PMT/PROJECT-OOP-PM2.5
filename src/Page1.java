@@ -2,9 +2,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class Page1 extends MyPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -107,23 +104,5 @@ public class Page1 extends MyPanel {
 		PFace.add(FaceOrange);
 		PFace.add(FaceRad);
 		add(PFace);
-	}
-
-	public static JPanel getFrame2() {
-		Page2 page2 = new Page2();
-		page2.Frame1();
-		page2.Frame2();
-		page2.Frame3();
-		page2.Frame4();
-		return page2;
-	}
-
-	public static JPanel getFrame1() {
-		Page1 page1 = new Page1();
-		page1.setPanelMenu();
-		page1.setPanelLogo();
-		page1.setPanelRain();
-		page1.setPanelFace();
-		return page1;
 	}
 }

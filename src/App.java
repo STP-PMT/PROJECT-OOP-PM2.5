@@ -19,7 +19,11 @@ public class App {
         cardLayout.addLayoutComponent(page1, "page1");
         cardLayout.addLayoutComponent(page2, "page2");
         cardLayout.addLayoutComponent(page3, "page3");
+        AtionNextFrame(cardLayout,frame);
+        frame.setVisible(true);
+    }
 
+    public static void AtionNextFrame(CardLayout cardLayout,MyFrame frame){
         (Page1.getButtonMenu1()).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,6 +37,5 @@ public class App {
                 cardLayout.show(frame.getContentPane(), "page3");
             }
         });
-        frame.setVisible(true);
     }
 }
