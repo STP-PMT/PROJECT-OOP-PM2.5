@@ -22,7 +22,7 @@ public class App {
         AtionNextFrame(cardLayout,frame);
         frame.setVisible(true);
     }
-
+//Hello
     public static void AtionNextFrame(CardLayout cardLayout,MyFrame frame){
         (Page1.getButtonMenu1()).addActionListener(new ActionListener() {
             @Override
