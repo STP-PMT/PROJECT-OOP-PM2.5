@@ -10,7 +10,6 @@ public class Page3 extends MyPanel {
         panel.add(label);
         setImagetoButton(20, 590, 160, 65,"src\\image\\menuHome1.png");
         panel.add(button);
-
         add(panel);
     }
 

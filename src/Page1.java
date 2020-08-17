@@ -1,8 +1,11 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Page1 extends MyPanel {
+public class Page1 extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +29,8 @@ public class Page1 extends MyPanel {
 	private JButton FaceOrange;
 	private JButton FaceRad;
 	
-	public Page1(){
+	public Page1()
+	{
 		setPanelMenu();
 		setPanelLogo();
 		setPanelRain();
@@ -88,21 +92,99 @@ public class Page1 extends MyPanel {
 		add(PRain);
 	}
 
-	public void setPanelFace() {
+	public void setPanelFace() 
+	{
 		setPanel(20, 490, 588, 166, 0, 174, 169);
 		PFace = getPanel();
+		
 		setImagetoButton(20, 20, 125, 125, "src\\image\\p1.png");
 		FaceGreen = getButton();
+		FaceGreen.addActionListener(this);
+		
 		setImagetoButton(162, 20, 125, 125, "src\\image\\p2.png");
 		FaceYellow = getButton();
+		FaceYellow.addActionListener(this);
+		
 		setImagetoButton(299, 20, 125, 125, "src\\image\\p3.png");
 		FaceOrange = getButton();
+		FaceOrange.addActionListener(this);
+		
 		setImagetoButton(436, 20, 125, 125, "src\\image\\p4.png");
 		FaceRad = getButton();
+		FaceRad.addActionListener(this);
+		
 		PFace.add(FaceGreen);
 		PFace.add(FaceYellow);
 		PFace.add(FaceOrange);
 		PFace.add(FaceRad);
 		add(PFace);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == FaceGreen)
+		{
+			setVisible(false);
+			
+			remove(PLogo);
+			remove(LImage);
+			setPanel(630, 20, 370, 325, 0, 174, 169);
+			PLogo = getPanel();
+			setImagetoPanel(0, 0, 370, 325, "src\\image\\g1.png");
+			LImage = getLabel();
+			PLogo.add(LImage);
+			add(PLogo);
+				
+			setVisible(true);
+		}
+		
+		if(e.getSource() == FaceYellow)
+		{
+			setVisible(false);
+			
+			remove(PLogo);
+			remove(LImage);
+			setPanel(630, 20, 370, 325, 0, 174, 169);
+			PLogo = getPanel();
+			setImagetoPanel(0, 0, 370, 325, "src\\image\\g2.png");
+			LImage = getLabel();
+			PLogo.add(LImage);
+			add(PLogo);
+				
+			setVisible(true);
+		}
+		
+		if(e.getSource() == FaceOrange)
+		{
+			setVisible(false);
+			
+			remove(PLogo);
+			remove(LImage);
+			setPanel(630, 20, 370, 325, 0, 174, 169);
+			PLogo = getPanel();
+			setImagetoPanel(0, 0, 370, 325, "src\\image\\g3.png");
+			LImage = getLabel();
+			PLogo.add(LImage);
+			add(PLogo);
+				
+			setVisible(true);
+		}
+		
+		if(e.getSource() == FaceRad)
+		{
+			setVisible(false);
+			
+			remove(PLogo);
+			remove(LImage);
+			setPanel(630, 20, 370, 325, 0, 174, 169);
+			PLogo = getPanel();
+			setImagetoPanel(0, 0, 370, 325, "src\\image\\g4.png");
+			LImage = getLabel();
+			PLogo.add(LImage);
+			add(PLogo);
+				
+			setVisible(true);
+		}
 	}
 }
