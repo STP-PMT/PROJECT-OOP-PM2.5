@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Page1 extends MyPanel implements ActionListener{
+public class Page1 extends MyPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,9 +28,8 @@ public class Page1 extends MyPanel implements ActionListener{
 	private JButton FaceYellow;
 	private JButton FaceOrange;
 	private JButton FaceRad;
-	
-	public Page1()
-	{
+
+	public Page1() {
 		setPanelMenu();
 		setPanelLogo();
 		setPanelRain();
@@ -52,7 +51,7 @@ public class Page1 extends MyPanel implements ActionListener{
 	public JPanel getPanelFace() {
 		return PFace;
 	}
-	
+
 	public static JButton getButtonMenu1() {
 		return Bmenu1;
 	}
@@ -92,27 +91,26 @@ public class Page1 extends MyPanel implements ActionListener{
 		add(PRain);
 	}
 
-	public void setPanelFace() 
-	{
+	public void setPanelFace() {
 		setPanel(20, 490, 588, 166, 0, 174, 169);
 		PFace = getPanel();
-		
+
 		setImagetoButton(20, 20, 125, 125, "src\\image\\p1.png");
 		FaceGreen = getButton();
 		FaceGreen.addActionListener(this);
-		
+
 		setImagetoButton(162, 20, 125, 125, "src\\image\\p2.png");
 		FaceYellow = getButton();
 		FaceYellow.addActionListener(this);
-		
+
 		setImagetoButton(299, 20, 125, 125, "src\\image\\p3.png");
 		FaceOrange = getButton();
 		FaceOrange.addActionListener(this);
-		
+
 		setImagetoButton(436, 20, 125, 125, "src\\image\\p4.png");
 		FaceRad = getButton();
 		FaceRad.addActionListener(this);
-		
+
 		PFace.add(FaceGreen);
 		PFace.add(FaceYellow);
 		PFace.add(FaceOrange);
@@ -121,12 +119,9 @@ public class Page1 extends MyPanel implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getSource() == FaceGreen)
-		{
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == FaceGreen) {
 			setVisible(false);
-			
 			remove(PLogo);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
@@ -134,14 +129,9 @@ public class Page1 extends MyPanel implements ActionListener{
 			LImage = getLabel();
 			PLogo.add(LImage);
 			add(PLogo);
-				
 			setVisible(true);
-		}
-		
-		if(e.getSource() == FaceYellow)
-		{
+		} else if (e.getSource() == FaceYellow) {
 			setVisible(false);
-			
 			remove(PLogo);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
@@ -149,14 +139,9 @@ public class Page1 extends MyPanel implements ActionListener{
 			LImage = getLabel();
 			PLogo.add(LImage);
 			add(PLogo);
-				
 			setVisible(true);
-		}
-		
-		if(e.getSource() == FaceOrange)
-		{
+		} else if (e.getSource() == FaceOrange) {
 			setVisible(false);
-			
 			remove(PLogo);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
@@ -164,14 +149,9 @@ public class Page1 extends MyPanel implements ActionListener{
 			LImage = getLabel();
 			PLogo.add(LImage);
 			add(PLogo);
-				
 			setVisible(true);
-		}
-		
-		if(e.getSource() == FaceRad)
-		{
+		} else if (e.getSource() == FaceRad) {
 			setVisible(false);
-			
 			remove(PLogo);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
@@ -179,7 +159,6 @@ public class Page1 extends MyPanel implements ActionListener{
 			LImage = getLabel();
 			PLogo.add(LImage);
 			add(PLogo);
-				
 			setVisible(true);
 		}
 	}

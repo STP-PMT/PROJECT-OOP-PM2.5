@@ -45,7 +45,7 @@ public class Page2 extends MyPanel {
 	public void setTable() {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
-		PTable.setLayout(new GridLayout(10, 20));
+		PTable.setLayout(new GridLayout(20, 10));
 		BTable = new JButton();
 		for (int i = 1; i <= 200; i++) {
 			PTable.add(new JButton());
