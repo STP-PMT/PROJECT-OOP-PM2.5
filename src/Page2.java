@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.Color;
 
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -34,10 +35,11 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JButton SeclectFile;
 	private JButton Rain1;
 	private int returnVal = 3;
+	private int returnPeople = 0;
 	private File file;
-	private JPanel nArea;
 	private JFileChooser chooser;
 	private FileNameExtensionFilter filter;
+	private int numPeople;
 
 	public Page2() {
 		setTable();
@@ -86,13 +88,14 @@ public class Page2 extends MyPanel implements ActionListener {
 
 		setTextFeild(105, 95, 325, 30);
 		Random = getTextFeild();
-		PInputFile.add(textField);
+		PInputFile.add(Random);
 		setButton(435, 95, 138, 30, "OK");
 		Random_Ok = getButton();
 		PInputFile.add(Random_Ok);
 
 		SeclectFile.addActionListener(this);
 		SeclectFile_OK.addActionListener(this);
+		Population_Ok.addActionListener(this);
 		add(PInputFile);
 	}
 
@@ -125,20 +128,28 @@ public class Page2 extends MyPanel implements ActionListener {
 
 	public void setPeople(ArrayList<Integer> Dust) {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
-		panel.setLayout(new GridLayout(20, 10));
+		panel.setLayout(new GridLayout(10, 20));
 		System.out.println(Dust.size());
 		JButton[] PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
 			PArea[i] = new JButton();
-			if (Dust.get(i) < 50) {
-				PArea[i].setBackground(new Color(0, 255, 0));
-			} else {
-				PArea[i].setBackground(new Color(255, 0, 0));
-			}
-			panel.add(PArea[i]);
+			setTableColor(Dust.get(i),PArea[i]);
 		}
 		add(panel);
 	}
+	public void setTableColor(int Dust,JButton Area) {
+		if (Dust <= 50 && Dust >= 0) {
+			Area.setBackground(new Color(0, 204, 0));
+		} else if(Dust > 50 && Dust <= 100){
+			Area.setBackground(new Color(255, 255, 0));
+		}else if(Dust > 100 && Dust <= 150) {
+			Area.setBackground(new Color(255, 128, 0));
+		}else if(Dust > 150 && Dust <= 250) {
+			Area.setBackground(new Color(255, 64, 0));
+		}
+		panel.add(Area);
+	}
+	
 
 	public void setNewTable(ArrayList<Integer> numDust) {
 		setVisible(false);
@@ -163,7 +174,7 @@ public class Page2 extends MyPanel implements ActionListener {
 				log.setText("");
 			}
 		} else if (e.getSource() == SeclectFile_OK) {
-			if (returnVal == 0) {
+			if (returnVal == 0 && returnPeople == 1 ) {
 				file = chooser.getSelectedFile();
 				try {
 					String p = file.getPath();
@@ -186,10 +197,16 @@ public class Page2 extends MyPanel implements ActionListener {
 				}
 			} else {
 			}
-		}else if() {
-			
+		} else if (e.getSource() == Population_Ok) {
+			try {
+				String text = Population.getText();
+				System.err.print("Num: " + text);
+				numPeople = Integer.parseInt(text);
+				returnPeople = 1;
+			} catch (Exception e2) {
+				System.err.print("Exception: " + e2.getMessage());
+			}
+
 		}
-
 	}
-
 }
