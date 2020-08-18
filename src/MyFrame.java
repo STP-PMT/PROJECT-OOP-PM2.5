@@ -33,26 +33,4 @@ public class MyFrame extends JFrame {
             e.printStackTrace();
         }
     }
-    
-    public void setPage() {
-    	
-    }
-
-    public int getX_WIDTH(){
-        return this.X_WIDTH;
-    }
-
-    public int getY_HIGTH() {
-        return this.Y_HIGTH;
-    }
-    
-    public static JPanel getFrame2() {
-		Page2 page2 = new Page2();
-		page2.Frame1();
-		page2.Frame2();
-		page2.Frame3();
-		page2.Frame4();
-		return page2;
-	}
-
 }
