@@ -118,48 +118,28 @@ public class Page1 extends MyPanel implements ActionListener {
 		add(PFace);
 	}
 
+	public void setNewFace(String Url) {
+		setVisible(false);
+		remove(PLogo);
+		setPanel(630, 20, 370, 325, 0, 174, 169);
+		PLogo = getPanel();
+		setImagetoPanel(0, 0, 370, 325, Url);
+		LImage = getLabel();
+		PLogo.add(LImage);
+		add(PLogo);
+		setVisible(true);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == FaceGreen) {
-			setVisible(false);
-			remove(PLogo);
-			setPanel(630, 20, 370, 325, 0, 174, 169);
-			PLogo = getPanel();
-			setImagetoPanel(0, 0, 370, 325, "src\\image\\g1.png");
-			LImage = getLabel();
-			PLogo.add(LImage);
-			add(PLogo);
-			setVisible(true);
+			setNewFace("src\\image\\g1.png");
 		} else if (e.getSource() == FaceYellow) {
-			setVisible(false);
-			remove(PLogo);
-			setPanel(630, 20, 370, 325, 0, 174, 169);
-			PLogo = getPanel();
-			setImagetoPanel(0, 0, 370, 325, "src\\image\\g2.png");
-			LImage = getLabel();
-			PLogo.add(LImage);
-			add(PLogo);
-			setVisible(true);
+			setNewFace("src\\image\\g2.png");
 		} else if (e.getSource() == FaceOrange) {
-			setVisible(false);
-			remove(PLogo);
-			setPanel(630, 20, 370, 325, 0, 174, 169);
-			PLogo = getPanel();
-			setImagetoPanel(0, 0, 370, 325, "src\\image\\g3.png");
-			LImage = getLabel();
-			PLogo.add(LImage);
-			add(PLogo);
-			setVisible(true);
+			setNewFace("src\\image\\g3.png");
 		} else if (e.getSource() == FaceRad) {
-			setVisible(false);
-			remove(PLogo);
-			setPanel(630, 20, 370, 325, 0, 174, 169);
-			PLogo = getPanel();
-			setImagetoPanel(0, 0, 370, 325, "src\\image\\g4.png");
-			LImage = getLabel();
-			PLogo.add(LImage);
-			add(PLogo);
-			setVisible(true);
+			setNewFace("src\\image\\g4.png");
 		}
 	}
 }
