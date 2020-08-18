@@ -133,23 +133,23 @@ public class Page2 extends MyPanel implements ActionListener {
 		JButton[] PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
 			PArea[i] = new JButton();
-			setTableColor(Dust.get(i),PArea[i]);
+			setTableColor(Dust.get(i), PArea[i]);
 		}
 		add(panel);
 	}
-	public void setTableColor(int Dust,JButton Area) {
+
+	public void setTableColor(int Dust, JButton Area) {
 		if (Dust <= 50 && Dust >= 0) {
 			Area.setBackground(new Color(0, 204, 0));
-		} else if(Dust > 50 && Dust <= 100){
+		} else if (Dust > 50 && Dust <= 100) {
 			Area.setBackground(new Color(255, 255, 0));
-		}else if(Dust > 100 && Dust <= 150) {
+		} else if (Dust > 100 && Dust <= 150) {
 			Area.setBackground(new Color(255, 128, 0));
-		}else if(Dust > 150 && Dust <= 250) {
+		} else if (Dust > 150 && Dust <= 250) {
 			Area.setBackground(new Color(255, 64, 0));
 		}
 		panel.add(Area);
 	}
-	
 
 	public void setNewTable(ArrayList<Integer> numDust) {
 		setVisible(false);
@@ -158,43 +158,51 @@ public class Page2 extends MyPanel implements ActionListener {
 		setVisible(true);
 	}
 
+	public void setSelectFile() {
+		chooser = new JFileChooser();
+		filter = new FileNameExtensionFilter(".txt File", "txt");
+
+		chooser.setFileFilter(filter);
+		returnVal = chooser.showOpenDialog(Page2.this);
+		System.out.println(returnVal);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = chooser.getSelectedFile();
+			log.setText(file.getPath());
+		} else {
+			log.setText("");
+		}
+	}
+
+	public void setNewTable() {
+		file = chooser.getSelectedFile();
+		try {
+			String p = file.getPath();
+			Path path = Paths.get(p);
+			BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+			ArrayList<Integer> numDust = new ArrayList<Integer>();
+			Scanner scanner = new Scanner(path);
+			while (scanner.hasNext()) {
+				if (scanner.hasNextInt()) {
+					numDust.add(scanner.nextInt());
+				} else {
+					scanner.next();
+				}
+			}
+			scanner.close();
+			setNewTable(numDust);
+			reader.close();
+		} catch (IOException e1) {
+			System.err.println("IOException: " + e1.getMessage());
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == SeclectFile) {
-			chooser = new JFileChooser();
-			filter = new FileNameExtensionFilter(".txt File", "txt");
-
-			chooser.setFileFilter(filter);
-			returnVal = chooser.showOpenDialog(Page2.this);
-			System.out.println(returnVal);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = chooser.getSelectedFile();
-				log.setText(file.getPath());
-			} else {
-				log.setText("");
-			}
+			setSelectFile();
 		} else if (e.getSource() == SeclectFile_OK) {
-			if (returnVal == 0 && returnPeople == 1 ) {
-				file = chooser.getSelectedFile();
-				try {
-					String p = file.getPath();
-					Path path = Paths.get(p);
-					BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-					ArrayList<Integer> numDust = new ArrayList<Integer>();
-					Scanner scanner = new Scanner(path);
-					while (scanner.hasNext()) {
-						if (scanner.hasNextInt()) {
-							numDust.add(scanner.nextInt());
-						} else {
-							scanner.next();
-						}
-					}
-					scanner.close();
-					setNewTable(numDust);
-					reader.close();
-				} catch (IOException e1) {
-					System.err.println("IOException: " + e1.getMessage());
-				}
+			if (returnVal == 0 && returnPeople == 1) {
+				setNewTable();
 			} else {
 			}
 		} else if (e.getSource() == Population_Ok) {
