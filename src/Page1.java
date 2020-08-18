@@ -128,7 +128,6 @@ public class Page1 extends MyPanel implements ActionListener{
 			setVisible(false);
 			
 			remove(PLogo);
-			remove(LImage);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
 			setImagetoPanel(0, 0, 370, 325, "src\\image\\g1.png");
@@ -144,7 +143,6 @@ public class Page1 extends MyPanel implements ActionListener{
 			setVisible(false);
 			
 			remove(PLogo);
-			remove(LImage);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
 			setImagetoPanel(0, 0, 370, 325, "src\\image\\g2.png");
@@ -160,7 +158,6 @@ public class Page1 extends MyPanel implements ActionListener{
 			setVisible(false);
 			
 			remove(PLogo);
-			remove(LImage);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
 			setImagetoPanel(0, 0, 370, 325, "src\\image\\g3.png");
@@ -176,7 +173,6 @@ public class Page1 extends MyPanel implements ActionListener{
 			setVisible(false);
 			
 			remove(PLogo);
-			remove(LImage);
 			setPanel(630, 20, 370, 325, 0, 174, 169);
 			PLogo = getPanel();
 			setImagetoPanel(0, 0, 370, 325, "src\\image\\g4.png");
