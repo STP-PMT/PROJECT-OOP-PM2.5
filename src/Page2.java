@@ -11,11 +11,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -24,6 +22,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Page2 extends MyPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JPanel PTable;
+	private JButton BTable;
 	JButton Rain1;
 	JButton btnSeclect;
 	JButton btnOK;
@@ -35,21 +35,22 @@ public class Page2 extends MyPanel {
 
 	JFileChooser chooser = new JFileChooser();
 	FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt File", "txt");
+	
 	Page2(){
-		Frame1();
+		setTable();
 		Frame2();
 		Frame3();
 		Frame4();
 	}
-	public void Frame1() {
-		JButton Pbutton;
+	public void setTable() {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
-		panel.setLayout(new GridLayout(10, 20));
-		button = new JButton();
+		PTable = getPanel();
+		PTable.setLayout(new GridLayout(10, 20));
+		BTable = new JButton();
 		for (int i = 1; i <= 200; i++) {
-			panel.add(new JButton());
+			PTable.add(new JButton());
 		}
-		add(panel);
+		add(PTable);
 	}
 
 	public void people(ArrayList<Integer> Dust) {
