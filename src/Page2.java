@@ -14,109 +14,86 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class Page2 extends MyPanel {
+public class Page2 extends MyPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel PTable;
-	private JButton BTable;
-	JButton Rain1;
-	JButton btnSeclect;
-	JButton btnOK;
-	JTextField log;
-	File file;
-	int returnVal = 3;
-	JPanel nArea;
-	boolean isOk = false;
+	private JPanel PInputFile;
+	private JButton SeclectFile_OK;
+	private JTextField log;
+	private JTextField Population;
+	private JButton Population_Ok;
+	private JTextField Random;
+	private JButton Random_Ok;
+	private JButton SeclectFile;
+	private JButton Rain1;
+	private int returnVal = 3;
+	private File file;
+	private JPanel nArea;
+	private JFileChooser chooser;
+	private FileNameExtensionFilter filter;
 
-	JFileChooser chooser = new JFileChooser();
-	FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt File", "txt");
-	
-	Page2(){
+	public Page2() {
 		setTable();
-		Frame2();
+		setInputFile();
 		Frame3();
 		Frame4();
 	}
+
 	public void setTable() {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
 		PTable.setLayout(new GridLayout(20, 10));
-		BTable = new JButton();
 		for (int i = 1; i <= 200; i++) {
 			PTable.add(new JButton());
 		}
 		add(PTable);
 	}
 
-	public void people(ArrayList<Integer> Dust) {
-		setPanel(20, 20, 588, 450, 39, 54, 73);
-		panel.setLayout(new GridLayout(10, 20));
-		System.out.println(Dust.size());
-		JButton[] PArea = new JButton[Dust.size()];
-		for (int i = 0; i < Dust.size(); i++) {
-			PArea[i] = new JButton();
-			if (Dust.get(i) < 50) {
-				PArea[i].setBackground(new Color(0, 255, 0));
-			} else {
-				PArea[i].setBackground(new Color(255, 0, 0));
-			}
-			panel.add(PArea[i]);
-		}
-		add(panel);
-	}
-
-	public void Frame2() {
-		// add select file
+	public void setInputFile() {
 		setPanel(20, 490, 588, 166);
+		PInputFile = getPanel();
 		setLabel(15, 15, 100, 30, "Select File :", 15);
-		panel.add(label);
+		PInputFile.add(label);
+		setLabel(15, 55, 100, 30, "Population :", 15);
+		PInputFile.add(label);
+		setLabel(15, 95, 100, 30, "Random     :", 15);
+		PInputFile.add(label);
+
 		setTextFeild(105, 15, 325, 30);
 		log = getTextFeild();
 		log.setEditable(false);
-		panel.add(log);
+		PInputFile.add(log);
 		setButton(435, 15, 80, 30, "SELECT");
-		btnSeclect = getButton();
-		btnSeclect.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ActionSelectFile(e);
-			}
-		});
-		panel.add(btnSeclect);
+		SeclectFile = getButton();
+		PInputFile.add(SeclectFile);
 		setButton(518, 15, 55, 30, "OK");
-		btnOK = getButton();
-		btnOK.addActionListener(new ActionListener() {
+		SeclectFile_OK = getButton();
+		PInputFile.add(SeclectFile_OK);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ActionOKFile(e);
-			}
-		});
-		panel.add(btnOK);
-
-		// add people
-		setLabel(15, 55, 100, 30, "Population :", 15);
-		panel.add(label);
 		setTextFeild(105, 55, 325, 30);
-		panel.add(textField);
+		Population = getTextFeild();
+		PInputFile.add(Population);
 		setButton(435, 55, 138, 30, "OK");
-		panel.add(button);
+		Population_Ok = getButton();
+		PInputFile.add(Population_Ok);
 
-		//
-		setLabel(15, 95, 100, 30, "Random     :", 15);
-		panel.add(label);
 		setTextFeild(105, 95, 325, 30);
-		panel.add(textField);
+		Random = getTextFeild();
+		PInputFile.add(textField);
 		setButton(435, 95, 138, 30, "OK");
-		panel.add(button);
+		Random_Ok = getButton();
+		PInputFile.add(Random_Ok);
 
-		add(panel);
+		SeclectFile.addActionListener(this);
+		SeclectFile_OK.addActionListener(this);
+		add(PInputFile);
 	}
 
 	public void Frame3() {
@@ -146,9 +123,37 @@ public class Page2 extends MyPanel {
 		add(panel);
 	}
 
-	private void ActionSelectFile(ActionEvent e) {
-		chooser.setFileFilter(filter);
-		if (e.getSource() == btnSeclect) {
+	public void setPeople(ArrayList<Integer> Dust) {
+		setPanel(20, 20, 588, 450, 39, 54, 73);
+		panel.setLayout(new GridLayout(20, 10));
+		System.out.println(Dust.size());
+		JButton[] PArea = new JButton[Dust.size()];
+		for (int i = 0; i < Dust.size(); i++) {
+			PArea[i] = new JButton();
+			if (Dust.get(i) < 50) {
+				PArea[i].setBackground(new Color(0, 255, 0));
+			} else {
+				PArea[i].setBackground(new Color(255, 0, 0));
+			}
+			panel.add(PArea[i]);
+		}
+		add(panel);
+	}
+
+	public void setNewTable(ArrayList<Integer> numDust) {
+		setVisible(false);
+		remove(PTable);
+		setPeople(numDust);
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == SeclectFile) {
+			chooser = new JFileChooser();
+			filter = new FileNameExtensionFilter(".txt File", "txt");
+
+			chooser.setFileFilter(filter);
 			returnVal = chooser.showOpenDialog(Page2.this);
 			System.out.println(returnVal);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -157,52 +162,34 @@ public class Page2 extends MyPanel {
 			} else {
 				log.setText("");
 			}
+		} else if (e.getSource() == SeclectFile_OK) {
+			if (returnVal == 0) {
+				file = chooser.getSelectedFile();
+				try {
+					String p = file.getPath();
+					Path path = Paths.get(p);
+					BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+					ArrayList<Integer> numDust = new ArrayList<Integer>();
+					Scanner scanner = new Scanner(path);
+					while (scanner.hasNext()) {
+						if (scanner.hasNextInt()) {
+							numDust.add(scanner.nextInt());
+						} else {
+							scanner.next();
+						}
+					}
+					scanner.close();
+					setNewTable(numDust);
+					reader.close();
+				} catch (IOException e1) {
+					System.err.println("IOException: " + e1.getMessage());
+				}
+			} else {
+			}
+		}else if() {
+			
 		}
 
-	}
-
-	private void ActionOKFile(ActionEvent e) {
-		if (returnVal == 0) {
-			file = chooser.getSelectedFile();
-			try {
-				String p = file.getPath();
-				Path path = Paths.get(p);
-				BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-				ArrayList<Integer> numDust = new ArrayList<Integer>();
-				Scanner scanner = new Scanner(path);
-				while (scanner.hasNext()) {
-					if (scanner.hasNextInt()) {
-						numDust.add(scanner.nextInt());
-					} else {
-						scanner.next();
-					}
-				}
-				
-				setVisible(false);
-				removeAll();
-				people(numDust);
-				add(panel);
-				add(getFrame24());
-				setVisible(true);
-
-				reader.close();
-			} catch (IOException e1) {
-				System.err.println("IOException: " + e1.getMessage());
-			}
-		}else {}
-		
-		log.setEditable(true);
-		log.setText(file.getPath());
-		log.setEditable(false);
-		
-	}
-
-	public static JPanel getFrame24() {
-		Page2 page2 = new Page2();
-		page2.Frame2();
-		page2.Frame3();
-		page2.Frame4();
-		return page2;
 	}
 
 }
