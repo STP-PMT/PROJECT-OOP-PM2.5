@@ -40,6 +40,9 @@ public class MyPanel extends JPanel {
     public JLabel getLabel() {
     	return label;
     }
+    public TextArea getTextArea() {
+    	return textArea;
+    }
 
     public void setPanel(int Xl, int Yl, int X, int Y, int r, int g, int b) {
         this.panel = new JPanel(null);

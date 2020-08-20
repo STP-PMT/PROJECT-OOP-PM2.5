@@ -119,7 +119,7 @@ public class Page1 extends MyPanel implements ActionListener {
 	}
 
 	public void setNewFace(String Url) {
-		setVisible(false);
+		
 		remove(PLogo);
 		setPanel(630, 20, 370, 325, 0, 174, 169);
 		PLogo = getPanel();
@@ -127,7 +127,7 @@ public class Page1 extends MyPanel implements ActionListener {
 		LImage = getLabel();
 		PLogo.add(LImage);
 		add(PLogo);
-		setVisible(true);
+		repaint();
 	}
 
 	@Override

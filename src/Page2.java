@@ -1,6 +1,9 @@
 import java.awt.GridLayout;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -40,11 +43,13 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JFileChooser chooser;
 	private FileNameExtensionFilter filter;
 	private int numPeople;
+	private TextArea TextDetail;
+	private JPanel PDetail;
 
 	public Page2() {
 		setTable();
 		setInputFile();
-		Frame3();
+		setDetail();
 		Frame4();
 	}
 
@@ -99,16 +104,19 @@ public class Page2 extends MyPanel implements ActionListener {
 		add(PInputFile);
 	}
 
-	public void Frame3() {
+	public void setDetail() {
 		setPanel(630, 20, 370, 450);
+		PDetail = getPanel();
 		setTextAarea(15, 15, 340, 200,
 				"population:\nDust volume:\nGood health:\nSick:\nPercentage of population sick :");
-		textArea.setEditable(false);
-		panel.add(textArea);
+		TextDetail = getTextArea();
+		TextDetail.setEditable(false);
+		PDetail.add(TextDetail);
 		setImagetoPanel(15, 230, 340, 200, "src\\image\\K5.png");
-		panel.add(label);
-		add(panel);
+		PDetail.add(label);
+		add(PDetail);
 	}
+
 
 	public void Frame4() {
 		JToggleButton button2;
@@ -126,20 +134,25 @@ public class Page2 extends MyPanel implements ActionListener {
 		add(panel);
 	}
 
-	public void setPeople(ArrayList<Integer> Dust) {
+	public void setPeople(ArrayList<Integer> Dust, int numPeople) {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
-		panel.setLayout(new GridLayout(10, 20));
+		PTable = getPanel();
+		PTable.setLayout(new GridLayout(10, 20));
 		System.out.println(Dust.size());
 		JButton[] PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
 			PArea[i] = new JButton();
-			setTableColor(Dust.get(i), PArea[i]);
+			setTableColor(Dust.get(i), PArea[i], PTable, numPeople);
 		}
-		add(panel);
+		add(PTable);
+		// repaint();
 	}
 
-	public void setTableColor(int Dust, JButton Area) {
+	public void setTableColor(int Dust, JButton Area, JPanel PTable, int numPeople) {
+		Random rand = new Random();
+		int dust=0;
 		if (Dust <= 50 && Dust >= 0) {
+			dust = rand.nextInt(9);
 			Area.setBackground(new Color(0, 204, 0));
 		} else if (Dust > 50 && Dust <= 100) {
 			Area.setBackground(new Color(255, 255, 0));
@@ -148,14 +161,26 @@ public class Page2 extends MyPanel implements ActionListener {
 		} else if (Dust > 150 && Dust <= 250) {
 			Area.setBackground(new Color(255, 64, 0));
 		}
-		panel.add(Area);
+		Area.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				PDetail.remove(TextDetail);
+				//setPanel(630, 20, 370, 450);
+				//PDetail = getPanel();
+				PDetail.setBackground(new Color(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
+				add(PDetail);
+				repaint();
+			}
+		});
+		PTable.add(Area);
 	}
 
-	public void setNewTable(ArrayList<Integer> numDust) {
+	public void setTable(ArrayList<Integer> numDust, int numPeople) {
 		setVisible(false);
 		remove(PTable);
-		setPeople(numDust);
+		setPeople(numDust, numPeople);
 		setVisible(true);
+
 	}
 
 	public void setSelectFile() {
@@ -189,8 +214,8 @@ public class Page2 extends MyPanel implements ActionListener {
 				}
 			}
 			scanner.close();
-			setNewTable(numDust);
 			reader.close();
+			setTable(numDust, numPeople);
 		} catch (IOException e1) {
 			System.err.println("IOException: " + e1.getMessage());
 		}
@@ -203,18 +228,25 @@ public class Page2 extends MyPanel implements ActionListener {
 		} else if (e.getSource() == SeclectFile_OK) {
 			if (returnVal == 0 && returnPeople == 1) {
 				setNewTable();
+				returnPeople = 0;
+				returnVal = 3;
 			} else {
 			}
 		} else if (e.getSource() == Population_Ok) {
-			try {
-				String text = Population.getText();
-				System.err.print("Num: " + text);
-				numPeople = Integer.parseInt(text);
-				returnPeople = 1;
-			} catch (Exception e2) {
-				System.err.print("Exception: " + e2.getMessage());
-			}
-
+			if (returnVal == 0 && returnPeople == 0)
+				try {
+					String text = Population.getText();
+					System.err.print("Num: " + text);
+					numPeople = Integer.parseInt(text);
+					returnPeople = 1;
+					setNewTable();
+					returnPeople = 0;
+					returnVal = 3;
+					// Random.setEditable(false);
+				} catch (Exception e2) {
+					System.err.print("Exception: " + e2.getMessage());
+				}
 		}
+
 	}
 }
