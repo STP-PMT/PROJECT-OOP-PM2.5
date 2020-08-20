@@ -109,9 +109,9 @@ public class Page2 extends MyPanel implements ActionListener {
 		PDetail = getPanel();
 		setTextAarea(15, 15, 340, 200,
 				"population:\nDust volume:\nGood health:\nSick:\nPercentage of population sick :");
-		TextDetail = getTextArea();
-		TextDetail.setEditable(false);
-		PDetail.add(TextDetail);
+		textArea = getTextArea();
+		textArea.setEditable(false);
+		PDetail.add(textArea);
 		setImagetoPanel(15, 230, 340, 200, "src\\image\\K5.png");
 		PDetail.add(label);
 		add(PDetail);
@@ -150,9 +150,7 @@ public class Page2 extends MyPanel implements ActionListener {
 
 	public void setTableColor(int Dust, JButton Area, JPanel PTable, int numPeople) {
 		Random rand = new Random();
-		int dust=0;
 		if (Dust <= 50 && Dust >= 0) {
-			dust = rand.nextInt(9);
 			Area.setBackground(new Color(0, 204, 0));
 		} else if (Dust > 50 && Dust <= 100) {
 			Area.setBackground(new Color(255, 255, 0));
@@ -164,11 +162,26 @@ public class Page2 extends MyPanel implements ActionListener {
 		Area.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				PDetail.remove(TextDetail);
-				//setPanel(630, 20, 370, 450);
-				//PDetail = getPanel();
-				PDetail.setBackground(new Color(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
-				add(PDetail);
+				int dust=0;
+				if (Dust <= 50 && Dust >= 0) {
+					 dust = rand.nextInt(10);
+				} else if (Dust > 50 && Dust <= 100) {
+					 dust = rand.nextInt(19)+10;
+				} else if (Dust > 100 && Dust <= 150) {
+					 dust = rand.nextInt(29)+20;
+				} else if (Dust > 150 && Dust <= 250) {
+					 dust = rand.nextInt(50)+30;
+				}
+				PDetail.remove(textArea);
+				setTextAarea(15, 15, 340, 200,
+						"population: "+numPeople
+						+ "\nDust volume:"+Dust
+						+ "\nGood health:"+(numPeople-(int)(numPeople*dust/100))
+						+ "\nSick:"+(int)(numPeople*dust/100)
+						+ "\nPercentage of population sick :"+dust);
+				textArea = getTextArea();
+				textArea.setEditable(false);
+				PDetail.add(textArea);
 				repaint();
 			}
 		});

@@ -28,7 +28,7 @@ public class MyPanel extends JPanel {
     protected Insets insets;
     protected JToggleButton toggleButton;
     protected Font font;
-    protected TextArea textArea;
+    protected JTextArea textArea;
     JFileChooser fc;
 
     public MyPanel() {
@@ -40,7 +40,7 @@ public class MyPanel extends JPanel {
     public JLabel getLabel() {
     	return label;
     }
-    public TextArea getTextArea() {
+    public JTextArea getTextArea() {
     	return textArea;
     }
 
@@ -135,7 +135,7 @@ public class MyPanel extends JPanel {
     }
 
     public void  setTextAarea(int Xl, int Yl, int X, int Y,String text){
-        this.textArea = new TextArea(text,X, Y,TextArea.SCROLLBARS_NONE);
+        this.textArea = new JTextArea(text);
         this.textArea.setBounds(Xl, Yl, X, Y);
         this.textArea.setFont(new Font(text,Font.PLAIN,15));
     }
