@@ -19,6 +19,7 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -174,7 +175,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		Area.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(start >= 0&& end >0) {
+				if(start >=0 && end >0 && start != end && start<end) {
 					int dust = 0;
 					if (Dust <= 50 && Dust >= 0) {
 						dust = rand.nextInt(10);
@@ -299,19 +300,21 @@ public class Page2 extends MyPanel implements ActionListener {
 			if (returnVal == 0 && returnPeople == 0) {
 				String text1 = Random1.getText();
 				String text2 = Random2.getText();
-				Random rand = new Random();
 				try {
 					start = Integer.parseInt(text1);
 					end = Integer.parseInt(text2);
-					numPeople = rand.nextInt((end - start) + 1) + start;
-					returnPeople = 1;
-					setNewTable();
-					returnPeople = 0;
-					returnVal = 3;
-					Population.setEditable(false);
-					Random1.setEditable(false);
-					Random2.setEditable(false);
-					Population.setText("");
+					if(start >=0 && end >0 && start != end && start<end) {
+						returnPeople = 1;
+						setNewTable();
+						returnPeople = 0;
+						returnVal = 3;
+						Population.setEditable(false);
+						Random1.setEditable(false);
+						Random2.setEditable(false);
+						Population.setText("");
+					}else {
+						JOptionPane.showMessageDialog(null, "Input again!!");
+					}
 				} catch (Exception e2) {
 					System.err.print("Exception: " + e2.getMessage());
 				}
