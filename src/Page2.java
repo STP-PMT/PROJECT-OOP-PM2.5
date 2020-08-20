@@ -50,6 +50,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JLabel pic1;
 	private JLabel pic2;
 
+	int RNumPeople[];
 	int sick[];
 	int good[];
 	int pDust[];
@@ -156,20 +157,21 @@ public class Page2 extends MyPanel implements ActionListener {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
 		PTable.setLayout(new GridLayout(10, 20));
-		
+
 		JButton[] PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
 			PArea[i] = new JButton();
-			setTableColor(Dust.get(i), PArea[i], PTable,sick[i],good[i],pDust[i]);
-			
+			if (numPeople>0) {
+				setTableColor(Dust.get(i), PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
+			} else {
+				setTableColor(Dust.get(i), PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
+			}
 		}
 		add(PTable);
 		// repaint();
 	}
 
-	public void setTableColor(int Dust, JButton Area, JPanel PTable,int sick,int good,int pDust) {
-		Random rand = new Random();
-
+	public void setTableColor(int Dust, JButton Area, JPanel PTable, int sick, int good, int pDust, int numPeople) {
 		if (Dust <= 50 && Dust >= 0) {
 			Area.setBackground(new Color(0, 204, 0));
 		} else if (Dust > 50 && Dust <= 100) {
@@ -183,13 +185,12 @@ public class Page2 extends MyPanel implements ActionListener {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (start >= 0 && end > 0 && start != end && start < end) {
-					setDetailPeople(numPeople,Dust,sick,good,pDust);
+					setDetailPeople(numPeople, Dust, sick, good, pDust);
 				} else {
-					setDetailPeople(numPeople,Dust,sick,good,pDust);
+					setDetailPeople(numPeople, Dust, sick, good, pDust);
 				}
 				repaint();
 			}
-
 			@Override
 			public void mouseExited(MouseEvent e) {
 				PDetail.remove(textArea);
@@ -201,12 +202,13 @@ public class Page2 extends MyPanel implements ActionListener {
 		});
 		PTable.add(Area);
 	}
-	public void setDetailPeople(int numPeople,int Dust,int sick,int good,int pDust) {
+
+	public void setDetailPeople(int numPeople, int Dust, int sick, int good, int pDust) {
 		PDetail.remove(pic1);
 		PDetail.remove(textArea);
-		setTextAarea(15, 15, 340, 200, "Population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust
-				+ "\nGood health\t\t  : " + good + "\nSick\t\t  : "
-				+ sick + "\nPercentage of population sick\t  : " + pDust + " %");
+		setTextAarea(15, 15, 340, 200,
+				"Population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust + "\nGood health\t\t  : " + good
+						+ "\nSick\t\t  : " + sick + "\nPercentage of population sick\t  : " + pDust + " %");
 		textArea = getTextArea();
 		textArea.setEditable(false);
 		PDetail.add(textArea);
@@ -235,6 +237,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	}
 
 	public void setNewTable() {
+		Random random = new Random();
 		file = chooser.getSelectedFile();
 		try {
 			String p = file.getPath();
@@ -249,20 +252,29 @@ public class Page2 extends MyPanel implements ActionListener {
 				}
 			}
 			scanner.close();
-			setResult(numPeople,numDust);
+			if (numPeople > 0) {
+				setResult(numPeople, numDust);
+				System.out.println(100);
+			} else {
+				RNumPeople = new int[numDust.size()];
+				for (int i = 0; i < numDust.size(); i++) {
+					RNumPeople[i] = random.nextInt((end - start)+1) + start;
+					setResult(RNumPeople[i], numDust);
+				}
+			}
 			setTable(numDust);
 		} catch (IOException e1) {
 			System.err.println("IOException: " + e1.getMessage());
 		}
 	}
-	
-	public void setResult(int num,ArrayList<Integer> Dust) {
-		Random rand =new Random();
+
+	public void setResult(int num, ArrayList<Integer> Dust) {
+		Random rand = new Random();
 		sick = new int[Dust.size()];
 		good = new int[Dust.size()];
 		pDust = new int[Dust.size()];
-		
-		for(int i=0;i<Dust.size();i++) {
+
+		for (int i = 0; i < Dust.size(); i++) {
 			if (Dust.get(i) <= 50 && Dust.get(i) >= 0) {
 				pDust[i] = rand.nextInt(10);
 			} else if (Dust.get(i) > 50 && Dust.get(i) <= 100) {
@@ -272,8 +284,8 @@ public class Page2 extends MyPanel implements ActionListener {
 			} else if (Dust.get(i) > 150 && Dust.get(i) <= 250) {
 				pDust[i] = rand.nextInt(21) + 30;
 			}
-			sick[i]=(int)(num*pDust[i]/100);
-			good[i]=num-sick[i];
+			sick[i] = (int) (num * pDust[i] / 100);
+			good[i] = num - sick[i];
 		}
 	}
 
@@ -304,7 +316,6 @@ public class Page2 extends MyPanel implements ActionListener {
 					String text = Population.getText();
 					numPeople = Integer.parseInt(text);
 					if (numPeople >= 0) {
-						
 						returnPeople = 1;
 						setNewTable();
 						returnPeople = 0;
