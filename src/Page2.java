@@ -1,5 +1,4 @@
 import java.awt.GridLayout;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Page2 extends MyPanel implements ActionListener {
@@ -43,7 +41,6 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JFileChooser chooser;
 	private FileNameExtensionFilter filter;
 	private int numPeople;
-	private TextArea TextDetail;
 	private JPanel PDetail;
 	private JLabel pic1;
 	private JLabel pic2;
