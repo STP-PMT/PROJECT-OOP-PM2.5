@@ -238,7 +238,6 @@ public class Page2 extends MyPanel implements ActionListener {
 		remove(PTable);
 		setPeople(numDust);
 		setVisible(true);
-
 	}
 
 	public void setSelectFile() {
