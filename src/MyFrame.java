@@ -17,7 +17,7 @@ public class MyFrame extends JFrame {
         setSize(X_WIDTH, Y_HIGTH);
         setTitle("PM 2.5");
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLayout(null);
         setResizable(true);
         setMinimumSize(new Dimension(X_WIDTH,Y_HIGTH));
