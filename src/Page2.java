@@ -108,7 +108,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		setPanel(630, 20, 370, 450);
 		PDetail = getPanel();
 		setTextAarea(15, 15, 340, 200,
-				"population:\nDust volume:\nGood health:\nSick:\nPercentage of population sick :");
+				"Population:\nDust volume:\nGood health:\nSick:\nPercentage of population sick :");
 		textArea = getTextArea();
 		textArea.setEditable(false);
 		PDetail.add(textArea);
@@ -166,19 +166,19 @@ public class Page2 extends MyPanel implements ActionListener {
 				if (Dust <= 50 && Dust >= 0) {
 					 dust = rand.nextInt(10);
 				} else if (Dust > 50 && Dust <= 100) {
-					 dust = rand.nextInt(19)+10;
+					 dust = rand.nextInt(10)+10;
 				} else if (Dust > 100 && Dust <= 150) {
-					 dust = rand.nextInt(29)+20;
+					 dust = rand.nextInt(10)+20;
 				} else if (Dust > 150 && Dust <= 250) {
-					 dust = rand.nextInt(50)+30;
+					 dust = rand.nextInt(21)+30;
 				}
 				PDetail.remove(textArea);
 				setTextAarea(15, 15, 340, 200,
-						"population: "+numPeople
-						+ "\nDust volume:"+Dust
-						+ "\nGood health:"+(numPeople-(int)(numPeople*dust/100))
-						+ "\nSick:"+(int)(numPeople*dust/100)
-						+ "\nPercentage of population sick :"+dust);
+						"population\t\t  : "+numPeople
+						+ "\nDust volume\t\t  : "+Dust
+						+ "\nGood health\t\t  : "+(numPeople-(int)(numPeople*dust/100))
+						+ "\nSick\t\t  : "+(int)(numPeople*dust/100)
+						+ "\nPercentage of population sick\t  : "+dust+" %");
 				textArea = getTextArea();
 				textArea.setEditable(false);
 				PDetail.add(textArea);
@@ -259,6 +259,8 @@ public class Page2 extends MyPanel implements ActionListener {
 				} catch (Exception e2) {
 					System.err.print("Exception: " + e2.getMessage());
 				}
+		}else if (e.getSource() == Random_Ok) {
+			
 		}
 
 	}
