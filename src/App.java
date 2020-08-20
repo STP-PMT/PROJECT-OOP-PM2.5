@@ -36,5 +36,13 @@ public class App {
                 cardLayout.show(frame.getContentPane(), "page3");
             }
         });
+        
+
+        (Page3.getBHome()).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(frame.getContentPane(), "page1");
+            }
+        });
     }
 }
