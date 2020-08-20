@@ -47,7 +47,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JPanel PDetail;
 	private JLabel pic1;
 	private JLabel pic2;
-	
+
 	ArrayList<Integer> numDust;
 	boolean isRain1Click = false;
 	boolean isRain2Click = false;
@@ -170,30 +170,29 @@ public class Page2 extends MyPanel implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int num;
-				
+
 				for (int i = 0; i < numDust.size(); i++) {
 					if (numPeople > 0) {
-						setResult(numPeople,numDust);
-						if(numDust.get(i)-50<=0) {
-							num=0;
-						}else {
-							num =numDust.get(i)-50;
+						setResult(numPeople, numDust);
+						if (numDust.get(i) - 50 <= 0) {
+							num = 0;
+						} else {
+							num = numDust.get(i) - 50;
 						}
 						setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
 						numDust.remove(i);
-						numDust.add(i,num);
-					
-						
+						numDust.add(i, num);
+
 					} else {
-						setResult( RNumPeople[i],numDust);
-						if(numDust.get(i)-50<=0) {
-							num=0;
-						}else {
-							num =numDust.get(i)-50;
+						setResult(RNumPeople[i], numDust);
+						if (numDust.get(i) - 50 <= 0) {
+							num = 0;
+						} else {
+							num = numDust.get(i) - 50;
 						}
 						setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
 						numDust.remove(i);
-						numDust.add(i,num);
+						numDust.add(i, num);
 					}
 				}
 				add(PTable);
@@ -229,7 +228,7 @@ public class Page2 extends MyPanel implements ActionListener {
 			Area.setBackground(new Color(255, 128, 0));
 		} else if (Dust > 150 && Dust <= 250) {
 			Area.setBackground(new Color(255, 64, 0));
-		}else {
+		} else {
 			Area.setBackground(new Color(0, 204, 0));
 		}
 		Area.addMouseListener(new MouseAdapter() {
@@ -242,6 +241,7 @@ public class Page2 extends MyPanel implements ActionListener {
 				}
 				repaint();
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				PDetail.remove(label);
@@ -335,8 +335,8 @@ public class Page2 extends MyPanel implements ActionListener {
 				pDust[i] = rand.nextInt(10) + 20;
 			} else if (Dust.get(i) > 150 && Dust.get(i) <= 250) {
 				pDust[i] = rand.nextInt(21) + 30;
-			}else {
-				pDust[i]=0;
+			} else {
+				pDust[i] = 0;
 			}
 			sick[i] = (int) (num * pDust[i] / 100);
 			good[i] = num - sick[i];
