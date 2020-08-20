@@ -47,7 +47,9 @@ public class Page2 extends MyPanel implements ActionListener {
 	private int numPeople;
 	private TextArea TextDetail;
 	private JPanel PDetail;
-	
+	private JLabel pic1;
+	private JLabel pic2;
+
 	int start;
 	int end;
 
@@ -120,13 +122,14 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void setDetail() {
 		setPanel(630, 20, 370, 450);
 		PDetail = getPanel();
-		setTextAarea(15, 15, 340, 200,
-				"Population:\nDust volume:\nGood health:\nSick:\nPercentage of population sick :");
-		textArea = getTextArea();
-		textArea.setEditable(false);
-		PDetail.add(textArea);
+		setImagetoPanel(15, 15, 340, 200, "src/image/p8.png");
+		pic1 = getLabel();
+		PDetail.add(pic1);
 		setImagetoPanel(15, 230, 340, 200, "src\\image\\K5.png");
-		PDetail.add(label);
+		pic2 = getLabel();
+		PDetail.add(pic2);
+		setTextAarea(0, 0, 0, 0, "");
+		PDetail.add(textArea);
 		add(PDetail);
 	}
 
@@ -162,7 +165,7 @@ public class Page2 extends MyPanel implements ActionListener {
 
 	public void setTableColor(int Dust, JButton Area, JPanel PTable) {
 		Random rand = new Random();
-		
+
 		if (Dust <= 50 && Dust >= 0) {
 			Area.setBackground(new Color(0, 204, 0));
 		} else if (Dust > 50 && Dust <= 100) {
@@ -175,7 +178,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		Area.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(start >=0 && end >0 && start != end && start<end) {
+				if (start >= 0 && end > 0 && start != end && start < end) {
 					int dust = 0;
 					if (Dust <= 50 && Dust >= 0) {
 						dust = rand.nextInt(10);
@@ -186,6 +189,7 @@ public class Page2 extends MyPanel implements ActionListener {
 					} else if (Dust > 150 && Dust <= 250) {
 						dust = rand.nextInt(21) + 30;
 					}
+					PDetail.remove(pic1);
 					PDetail.remove(textArea);
 					numPeople = rand.nextInt((end - start) + 1) + start;
 					setTextAarea(15, 15, 340, 200, "population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust
@@ -194,24 +198,35 @@ public class Page2 extends MyPanel implements ActionListener {
 					textArea = getTextArea();
 					textArea.setEditable(false);
 					PDetail.add(textArea);
-				}else {
-				int dust = 0;
-				if (Dust <= 50 && Dust >= 0) {
-					dust = rand.nextInt(10);
-				} else if (Dust > 50 && Dust <= 100) {
-					dust = rand.nextInt(10) + 10;
-				} else if (Dust > 100 && Dust <= 150) {
-					dust = rand.nextInt(10) + 20;
-				} else if (Dust > 150 && Dust <= 250) {
-					dust = rand.nextInt(21) + 30;
+				} else {
+					int dust = 0;
+					if (Dust <= 50 && Dust >= 0) {
+						dust = rand.nextInt(10);
+					} else if (Dust > 50 && Dust <= 100) {
+						dust = rand.nextInt(10) + 10;
+					} else if (Dust > 100 && Dust <= 150) {
+						dust = rand.nextInt(10) + 20;
+					} else if (Dust > 150 && Dust <= 250) {
+						dust = rand.nextInt(21) + 30;
+					}
+					PDetail.remove(pic1);
+					PDetail.remove(textArea);
+					setTextAarea(15, 15, 340, 200, "population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust
+							+ "\nGood health\t\t  : " + (numPeople - (int) (numPeople * dust / 100)) + "\nSick\t\t  : "
+							+ (int) (numPeople * dust / 100) + "\nPercentage of population sick\t  : " + dust + " %");
+					textArea = getTextArea();
+					textArea.setEditable(false);
+					PDetail.add(textArea);
 				}
+				repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
 				PDetail.remove(textArea);
-				setTextAarea(15, 15, 340, 200, "population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust
-						+ "\nGood health\t\t  : " + (numPeople - (int) (numPeople * dust / 100)) + "\nSick\t\t  : "
-						+ (int) (numPeople * dust / 100) + "\nPercentage of population sick\t  : " + dust + " %");
-				textArea = getTextArea();
-				textArea.setEditable(false);
-				PDetail.add(textArea);}
+				setImagetoPanel(15, 15, 340, 200, "src/image/p8.png");
+				pic1 = getLabel();
+				PDetail.add(pic1);
 				repaint();
 			}
 		});
@@ -291,7 +306,7 @@ public class Page2 extends MyPanel implements ActionListener {
 					String text = Population.getText();
 					System.err.print("Num: " + text);
 					numPeople = Integer.parseInt(text);
-					if(numPeople >=0) {
+					if (numPeople >= 0) {
 						returnPeople = 1;
 						setNewTable();
 						returnPeople = 0;
@@ -301,10 +316,10 @@ public class Page2 extends MyPanel implements ActionListener {
 						Population.setEditable(false);
 						Random1.setText("");
 						Random2.setText("");
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Input again!!");
 					}
-					
+
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Input Number");
 					System.err.println("Exception: " + e2.getMessage());
@@ -316,7 +331,7 @@ public class Page2 extends MyPanel implements ActionListener {
 				try {
 					start = Integer.parseInt(text1);
 					end = Integer.parseInt(text2);
-					if(start >=0 && end >0 && start != end && start<end) {
+					if (start >= 0 && end > 0 && start != end && start < end) {
 						returnPeople = 1;
 						setNewTable();
 						returnPeople = 0;
@@ -325,7 +340,7 @@ public class Page2 extends MyPanel implements ActionListener {
 						Random1.setEditable(false);
 						Random2.setEditable(false);
 						Population.setText("");
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Input again!!");
 					}
 				} catch (Exception e2) {
