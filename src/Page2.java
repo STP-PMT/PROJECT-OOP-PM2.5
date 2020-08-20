@@ -4,11 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -39,6 +36,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JButton Random_Ok;
 	private JButton SeclectFile;
 	private JButton Rain1;
+	private JButton Rain2;
 	private int returnVal = 3;
 	private int returnPeople = 0;
 	private File file;
@@ -49,8 +47,12 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JPanel PDetail;
 	private JLabel pic1;
 	private JLabel pic2;
-
+	
+	ArrayList<Integer> numDust;
+	boolean isRain1Click = false;
+	boolean isRain2Click = false;
 	int RNumPeople[];
+	JButton[] PArea;
 	int sick[];
 	int good[];
 	int pDust[];
@@ -132,24 +134,71 @@ public class Page2 extends MyPanel implements ActionListener {
 		setImagetoPanel(15, 230, 340, 200, "src\\image\\K5.png");
 		pic2 = getLabel();
 		PDetail.add(pic2);
+
+		setImagetoPanel(0, 0, 0, 0, "");
+		PDetail.add(label);
 		setTextAarea(0, 0, 0, 0, "");
 		PDetail.add(textArea);
 		add(PDetail);
 	}
 
 	public void Frame4() {
-		JToggleButton button2;
-
 		setPanel(630, 490, 370, 166);
 
 		setButton(15, 15, 166, 140, "Artificial rain", 15);
 		Rain1 = getButton();
 		panel.add(Rain1);
 
-		setTaggleButton(190, 15, 166, 140, "Natural rain", 15);
-		button2 = getToggleButton();
-		panel.add(button2);
+		setButton(190, 15, 166, 140, "Natural rain", 15);
+		Rain2 = getButton();
+		panel.add(Rain2);
 
+		Rain1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (isRain1Click) {
+					Rain2.setBackground(new Color(255, 255, 255));
+					isRain1Click = false;
+				} else {
+					Rain2.setBackground(new Color(0, 255, 0));
+					isRain1Click = true;
+				}
+				System.out.println(isRain2Click);
+			}
+		});
+		Rain2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int num;
+				
+				for (int i = 0; i < numDust.size(); i++) {
+					if (numPeople > 0) {
+						setResult(numPeople,numDust);
+						if(numDust.get(i)-50<=0) {
+							num=0;
+						}else {
+							num =numDust.get(i)-50;
+						}
+						setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
+						numDust.remove(i);
+						numDust.add(i,num);
+					
+						
+					} else {
+						setResult( RNumPeople[i],numDust);
+						if(numDust.get(i)-50<=0) {
+							num=0;
+						}else {
+							num =numDust.get(i)-50;
+						}
+						setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
+						numDust.remove(i);
+						numDust.add(i,num);
+					}
+				}
+				add(PTable);
+			}
+		});
 		add(panel);
 	}
 
@@ -158,10 +207,10 @@ public class Page2 extends MyPanel implements ActionListener {
 		PTable = getPanel();
 		PTable.setLayout(new GridLayout(10, 20));
 
-		JButton[] PArea = new JButton[Dust.size()];
+		PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
 			PArea[i] = new JButton();
-			if (numPeople>0) {
+			if (numPeople > 0) {
 				setTableColor(Dust.get(i), PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
 			} else {
 				setTableColor(Dust.get(i), PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
@@ -180,6 +229,8 @@ public class Page2 extends MyPanel implements ActionListener {
 			Area.setBackground(new Color(255, 128, 0));
 		} else if (Dust > 150 && Dust <= 250) {
 			Area.setBackground(new Color(255, 64, 0));
+		}else {
+			Area.setBackground(new Color(0, 204, 0));
 		}
 		Area.addMouseListener(new MouseAdapter() {
 			@Override
@@ -193,6 +244,7 @@ public class Page2 extends MyPanel implements ActionListener {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
+				PDetail.remove(label);
 				PDetail.remove(textArea);
 				setImagetoPanel(15, 15, 340, 200, "src/image/p8.png");
 				pic1 = getLabel();
@@ -242,7 +294,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		try {
 			String p = file.getPath();
 			Path path = Paths.get(p);
-			ArrayList<Integer> numDust = new ArrayList<Integer>();
+			numDust = new ArrayList<Integer>();
 			Scanner scanner = new Scanner(path);
 			while (scanner.hasNext()) {
 				if (scanner.hasNextInt()) {
@@ -258,7 +310,7 @@ public class Page2 extends MyPanel implements ActionListener {
 			} else {
 				RNumPeople = new int[numDust.size()];
 				for (int i = 0; i < numDust.size(); i++) {
-					RNumPeople[i] = random.nextInt((end - start)+1) + start;
+					RNumPeople[i] = random.nextInt((end - start) + 1) + start;
 					setResult(RNumPeople[i], numDust);
 				}
 			}
@@ -275,7 +327,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		pDust = new int[Dust.size()];
 
 		for (int i = 0; i < Dust.size(); i++) {
-			if (Dust.get(i) <= 50 && Dust.get(i) >= 0) {
+			if (Dust.get(i) <= 50 && Dust.get(i) > 0) {
 				pDust[i] = rand.nextInt(10);
 			} else if (Dust.get(i) > 50 && Dust.get(i) <= 100) {
 				pDust[i] = rand.nextInt(10) + 10;
@@ -283,6 +335,8 @@ public class Page2 extends MyPanel implements ActionListener {
 				pDust[i] = rand.nextInt(10) + 20;
 			} else if (Dust.get(i) > 150 && Dust.get(i) <= 250) {
 				pDust[i] = rand.nextInt(21) + 30;
+			}else {
+				pDust[i]=0;
 			}
 			sick[i] = (int) (num * pDust[i] / 100);
 			good[i] = num - sick[i];
