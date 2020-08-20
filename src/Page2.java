@@ -268,9 +268,16 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == SeclectFile) {
 			setSelectFile();
+			setVisible(false);
+			remove(PTable);
+			setTable();
+			setVisible(true);
 			Population.setEditable(true);
 			Random1.setEditable(true);
 			Random2.setEditable(true);
+			Random1.setText("");
+			Random2.setText("");
+			Population.setText("");
 		} else if (e.getSource() == SeclectFile_OK) {
 			if (returnVal == 0 && returnPeople == 1) {
 				setNewTable();
@@ -299,7 +306,8 @@ public class Page2 extends MyPanel implements ActionListener {
 					}
 					
 				} catch (Exception e2) {
-					System.err.print("Exception: " + e2.getMessage());
+					JOptionPane.showMessageDialog(null, "Input Number");
+					System.err.println("Exception: " + e2.getMessage());
 				}
 		} else if (e.getSource() == Random_Ok) {
 			if (returnVal == 0 && returnPeople == 0) {
@@ -321,7 +329,8 @@ public class Page2 extends MyPanel implements ActionListener {
 						JOptionPane.showMessageDialog(null, "Input again!!");
 					}
 				} catch (Exception e2) {
-					System.err.print("Exception: " + e2.getMessage());
+					JOptionPane.showMessageDialog(null, "Input Number");
+					System.err.println("Exception: " + e2.getMessage());
 				}
 			}
 		}
