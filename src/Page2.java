@@ -33,7 +33,8 @@ public class Page2 extends MyPanel implements ActionListener {
 	private JTextField log;
 	private JTextField Population;
 	private JButton Population_Ok;
-	private JTextField Random;
+	private JTextField Random1;
+	private JTextField Random2;
 	private JButton Random_Ok;
 	private JButton SeclectFile;
 	private JButton Rain1;
@@ -45,6 +46,9 @@ public class Page2 extends MyPanel implements ActionListener {
 	private int numPeople;
 	private TextArea TextDetail;
 	private JPanel PDetail;
+	
+	int start;
+	int end;
 
 	public Page2() {
 		setTable();
@@ -91,9 +95,16 @@ public class Page2 extends MyPanel implements ActionListener {
 		Population_Ok = getButton();
 		PInputFile.add(Population_Ok);
 
-		setTextFeild(105, 95, 325, 30);
-		Random = getTextFeild();
-		PInputFile.add(Random);
+		setLabel(105, 95, 100, 30, "Between ", 15);
+		PInputFile.add(label);
+		setTextFeild(175, 95, 110, 30);
+		Random1 = getTextFeild();
+		PInputFile.add(Random1);
+		setLabel(295, 95, 100, 30, "and ", 15);
+		PInputFile.add(label);
+		setTextFeild(330, 95, 100, 30);
+		Random2 = getTextFeild();
+		PInputFile.add(Random2);
 		setButton(435, 95, 138, 30, "OK");
 		Random_Ok = getButton();
 		PInputFile.add(Random_Ok);
@@ -101,6 +112,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		SeclectFile.addActionListener(this);
 		SeclectFile_OK.addActionListener(this);
 		Population_Ok.addActionListener(this);
+		Random_Ok.addActionListener(this);
 		add(PInputFile);
 	}
 
@@ -116,7 +128,6 @@ public class Page2 extends MyPanel implements ActionListener {
 		PDetail.add(label);
 		add(PDetail);
 	}
-
 
 	public void Frame4() {
 		JToggleButton button2;
@@ -134,7 +145,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		add(panel);
 	}
 
-	public void setPeople(ArrayList<Integer> Dust, int numPeople) {
+	public void setPeople(ArrayList<Integer> Dust) {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
 		PTable.setLayout(new GridLayout(10, 20));
@@ -142,14 +153,15 @@ public class Page2 extends MyPanel implements ActionListener {
 		JButton[] PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
 			PArea[i] = new JButton();
-			setTableColor(Dust.get(i), PArea[i], PTable, numPeople);
+			setTableColor(Dust.get(i), PArea[i], PTable);
 		}
 		add(PTable);
 		// repaint();
 	}
 
-	public void setTableColor(int Dust, JButton Area, JPanel PTable, int numPeople) {
+	public void setTableColor(int Dust, JButton Area, JPanel PTable) {
 		Random rand = new Random();
+		
 		if (Dust <= 50 && Dust >= 0) {
 			Area.setBackground(new Color(0, 204, 0));
 		} else if (Dust > 50 && Dust <= 100) {
@@ -162,36 +174,53 @@ public class Page2 extends MyPanel implements ActionListener {
 		Area.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				int dust=0;
+				if(start >= 0&& end >0) {
+					int dust = 0;
+					if (Dust <= 50 && Dust >= 0) {
+						dust = rand.nextInt(10);
+					} else if (Dust > 50 && Dust <= 100) {
+						dust = rand.nextInt(10) + 10;
+					} else if (Dust > 100 && Dust <= 150) {
+						dust = rand.nextInt(10) + 20;
+					} else if (Dust > 150 && Dust <= 250) {
+						dust = rand.nextInt(21) + 30;
+					}
+					PDetail.remove(textArea);
+					numPeople = rand.nextInt((end - start) + 1) + start;
+					setTextAarea(15, 15, 340, 200, "population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust
+							+ "\nGood health\t\t  : " + (numPeople - (int) (numPeople * dust / 100)) + "\nSick\t\t  : "
+							+ (int) (numPeople * dust / 100) + "\nPercentage of population sick\t  : " + dust + " %");
+					textArea = getTextArea();
+					textArea.setEditable(false);
+					PDetail.add(textArea);
+				}else {
+				int dust = 0;
 				if (Dust <= 50 && Dust >= 0) {
-					 dust = rand.nextInt(10);
+					dust = rand.nextInt(10);
 				} else if (Dust > 50 && Dust <= 100) {
-					 dust = rand.nextInt(10)+10;
+					dust = rand.nextInt(10) + 10;
 				} else if (Dust > 100 && Dust <= 150) {
-					 dust = rand.nextInt(10)+20;
+					dust = rand.nextInt(10) + 20;
 				} else if (Dust > 150 && Dust <= 250) {
-					 dust = rand.nextInt(21)+30;
+					dust = rand.nextInt(21) + 30;
 				}
 				PDetail.remove(textArea);
-				setTextAarea(15, 15, 340, 200,
-						"population\t\t  : "+numPeople
-						+ "\nDust volume\t\t  : "+Dust
-						+ "\nGood health\t\t  : "+(numPeople-(int)(numPeople*dust/100))
-						+ "\nSick\t\t  : "+(int)(numPeople*dust/100)
-						+ "\nPercentage of population sick\t  : "+dust+" %");
+				setTextAarea(15, 15, 340, 200, "population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust
+						+ "\nGood health\t\t  : " + (numPeople - (int) (numPeople * dust / 100)) + "\nSick\t\t  : "
+						+ (int) (numPeople * dust / 100) + "\nPercentage of population sick\t  : " + dust + " %");
 				textArea = getTextArea();
 				textArea.setEditable(false);
-				PDetail.add(textArea);
+				PDetail.add(textArea);}
 				repaint();
 			}
 		});
 		PTable.add(Area);
 	}
 
-	public void setTable(ArrayList<Integer> numDust, int numPeople) {
+	public void setTable(ArrayList<Integer> numDust) {
 		setVisible(false);
 		remove(PTable);
-		setPeople(numDust, numPeople);
+		setPeople(numDust);
 		setVisible(true);
 
 	}
@@ -228,7 +257,7 @@ public class Page2 extends MyPanel implements ActionListener {
 			}
 			scanner.close();
 			reader.close();
-			setTable(numDust, numPeople);
+			setTable(numDust);
 		} catch (IOException e1) {
 			System.err.println("IOException: " + e1.getMessage());
 		}
@@ -238,6 +267,9 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == SeclectFile) {
 			setSelectFile();
+			Population.setEditable(true);
+			Random1.setEditable(true);
+			Random2.setEditable(true);
 		} else if (e.getSource() == SeclectFile_OK) {
 			if (returnVal == 0 && returnPeople == 1) {
 				setNewTable();
@@ -255,13 +287,35 @@ public class Page2 extends MyPanel implements ActionListener {
 					setNewTable();
 					returnPeople = 0;
 					returnVal = 3;
-					// Random.setEditable(false);
+					Random1.setEditable(false);
+					Random2.setEditable(false);
+					Population.setEditable(false);
+					Random1.setText("");
+					Random2.setText("");
 				} catch (Exception e2) {
 					System.err.print("Exception: " + e2.getMessage());
 				}
-		}else if (e.getSource() == Random_Ok) {
-			
+		} else if (e.getSource() == Random_Ok) {
+			if (returnVal == 0 && returnPeople == 0) {
+				String text1 = Random1.getText();
+				String text2 = Random2.getText();
+				Random rand = new Random();
+				try {
+					start = Integer.parseInt(text1);
+					end = Integer.parseInt(text2);
+					numPeople = rand.nextInt((end - start) + 1) + start;
+					returnPeople = 1;
+					setNewTable();
+					returnPeople = 0;
+					returnVal = 3;
+					Population.setEditable(false);
+					Random1.setEditable(false);
+					Random2.setEditable(false);
+					Population.setText("");
+				} catch (Exception e2) {
+					System.err.print("Exception: " + e2.getMessage());
+				}
+			}
 		}
-
 	}
 }
