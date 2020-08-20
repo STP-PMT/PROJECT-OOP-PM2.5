@@ -284,15 +284,20 @@ public class Page2 extends MyPanel implements ActionListener {
 					String text = Population.getText();
 					System.err.print("Num: " + text);
 					numPeople = Integer.parseInt(text);
-					returnPeople = 1;
-					setNewTable();
-					returnPeople = 0;
-					returnVal = 3;
-					Random1.setEditable(false);
-					Random2.setEditable(false);
-					Population.setEditable(false);
-					Random1.setText("");
-					Random2.setText("");
+					if(numPeople >=0) {
+						returnPeople = 1;
+						setNewTable();
+						returnPeople = 0;
+						returnVal = 3;
+						Random1.setEditable(false);
+						Random2.setEditable(false);
+						Population.setEditable(false);
+						Random1.setText("");
+						Random2.setText("");
+					}else {
+						JOptionPane.showMessageDialog(null, "Input again!!");
+					}
+					
 				} catch (Exception e2) {
 					System.err.print("Exception: " + e2.getMessage());
 				}
