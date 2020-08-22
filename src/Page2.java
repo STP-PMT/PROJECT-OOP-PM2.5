@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Page2 extends MyPanel implements ActionListener {
+	int rl = 0;
 
 	private static final long serialVersionUID = 1L;
 	private JPanel PTable;
@@ -66,7 +67,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void setTable() {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
-		PTable.setLayout(new GridLayout(10, 20));
+		PTable.setLayout(new GridLayout(0, 20));
 		for (int i = 1; i <= 200; i++) {
 			PTable.add(new JButton());
 		}
@@ -168,9 +169,9 @@ public class Page2 extends MyPanel implements ActionListener {
 			public void mouseClicked(MouseEvent e) {
 				for (int i = 0; i < numDust.size(); i++) {
 					if (numPeople > 0) {
-						setButtonColor(i,50);
+						setButtonColor(i, 50);
 					} else {
-						setButtonColor(i,50);
+						setButtonColor(i, 50);
 					}
 				}
 				add(PTable);
@@ -182,7 +183,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void setPeople(ArrayList<Integer> Dust) {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
-		PTable.setLayout(new GridLayout(10, 20));
+		PTable.setLayout(new GridLayout(0, 20));
 
 		PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
@@ -237,7 +238,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		PTable.add(Area);
 	}
 
-	public void setButtonColor(int i,int n) {
+	public void setButtonColor(int i, int n) {
 		if (numPeople > 0) {
 			int num;
 			setResult(numPeople, numDust);
@@ -268,34 +269,33 @@ public class Page2 extends MyPanel implements ActionListener {
 		if (isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if (e.getSource() == PArea[i]) {
-					PArea[i].getLayout();
 					try {
 						if (PArea[i] != null) {
-							setButtonColor(i,30);
+							setButtonColor(i, 30);
 						}
 						if (PArea[i + 1] != null) {
-							setButtonColor(i + 1,30);
+							setButtonColor(i + 1, 30);
 						}
 						if (PArea[i - 1] != null) {
-							setButtonColor(i - 1,30);
+							setButtonColor(i - 1, 30);
 						}
 						if (PArea[i + 20] != null) {
-							setButtonColor(i + 20,30);
+							setButtonColor(i + 20, 30);
 						}
 						if (PArea[i - 20] != null) {
-							setButtonColor(i - 20,30);
+							setButtonColor(i - 20, 30);
 						}
 						if (PArea[i + 21] != null) {
-							setButtonColor(i + 21,30);
+							setButtonColor(i + 21, 30);
 						}
 						if (PArea[i - 21] != null) {
-							setButtonColor(i - 21,30);
+							setButtonColor(i - 21, 30);
 						}
 						if (PArea[i - 19] != null) {
-							setButtonColor(i - 19,30);
+							setButtonColor(i - 19, 30);
 						}
 						if (PArea[i + 19] != null) {
-							setButtonColor(i + 19,30);
+							setButtonColor(i + 19, 30);
 						}
 						System.out.println(i);
 					} catch (Exception e2) {
@@ -336,18 +336,21 @@ public class Page2 extends MyPanel implements ActionListener {
 		try {
 			Path path = Paths.get(file.getPath());
 			numDust = new ArrayList<Integer>();
+
 			Scanner scanner = new Scanner(path);
 			while (scanner.hasNext()) {
 				if (scanner.hasNextInt()) {
 					numDust.add(scanner.nextInt());
+					// System.out.print(scanner.nextInt()+" ");
 				} else {
 					scanner.next();
+					rl++;
+					// System.out.println();
 				}
 			}
 			scanner.close();
 			if (numPeople > 0) {
 				setResult(numPeople, numDust);
-				System.out.println(100);
 			} else {
 				RNumPeople = new int[numDust.size()];
 				for (int i = 0; i < numDust.size(); i++) {
