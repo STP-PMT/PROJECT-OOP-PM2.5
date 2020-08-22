@@ -258,51 +258,70 @@ public class Page2 extends MyPanel implements ActionListener {
 	}
 
 	public void setRain1Color(int i) {
-		int num;
-		setResult(numPeople, numDust);
-		if (numDust.get(i) - 30 <= 0) {
-			num = 0;
-		} else {
-			num = numDust.get(i) - 30;
+		if (numPeople > 0) {
+			int num;
+			setResult(numPeople, numDust);
+			if (numDust.get(i) - 30 <= 0) {
+				num = 0;
+			} else {
+				num = numDust.get(i) - 30;
+			}
+			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
+			numDust.remove(i);
+			numDust.add(i, num);
+		}else {
+			int num;
+			setResult(numPeople, numDust);
+			if (numDust.get(i) - 30 <= 0) {
+				num = 0;
+			} else {
+				num = numDust.get(i) - 30;
+			}
+			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
+			numDust.remove(i);
+			numDust.add(i, num);
 		}
-		setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
-		numDust.remove(i);
-		numDust.add(i, num);
+		
 	}
 
 	public void Rain1(MouseEvent e) {
 		if(isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if(e.getSource() == PArea[i]) {
-					PArea[i].getLocation();
-					if(PArea[i]!= null) {
-						setRain1Color(i);
+					PArea[i].getLayout();
+					try {
+						if(PArea[i]!= null) {
+							setRain1Color(i);
+						}
+						if (PArea[i+1]!=null) {
+							setRain1Color(i+1);
+						}
+						if(PArea[i-1]!=null) {
+							setRain1Color(i-1);
+						}
+						if(PArea[i+20]!=null) {
+							setRain1Color(i+20);
+						}
+						if(PArea[i-20]!=null) {
+							setRain1Color(i-20);
+						}
+						if(PArea[i+21]!=null) {
+							setRain1Color(i+21);
+						}
+						if(PArea[i-21]!=null) {
+							setRain1Color(i-21);
+						}
+						if(PArea[i-19]!=null) {
+							setRain1Color(i-19);
+						}
+						if(PArea[i+19]!=null) {
+							setRain1Color(i+19);
+						}
+						System.out.println(i);
+					} catch (Exception e2) {
+						
 					}
-					if (PArea[i+1]!=null) {
-						setRain1Color(i+1);
-					}
-					if(PArea[i-1]!=null) {
-						setRain1Color(i-1);
-					}
-					if(PArea[i+20]!=null) {
-						setRain1Color(i+20);
-					}
-					if(PArea[i-20]!=null) {
-						setRain1Color(i-20);
-					}
-					if(PArea[i+21]!=null) {
-						setRain1Color(i+21);
-					}
-					if(PArea[i-21]!=null) {
-						setRain1Color(i-21);
-					}
-					if(PArea[i-19]!=null) {
-						setRain1Color(i-19);
-					}
-					if(PArea[i+19]!=null) {
-						setRain1Color(i+19);
-					}
-					System.out.println(PArea[i].getLocation()+" "+i);
+					
 					
 				}
 			}
