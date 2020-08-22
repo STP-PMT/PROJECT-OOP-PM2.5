@@ -321,8 +321,6 @@ public class Page2 extends MyPanel implements ActionListener {
 					} catch (Exception e2) {
 						
 					}
-					
-					
 				}
 			}
 		}
