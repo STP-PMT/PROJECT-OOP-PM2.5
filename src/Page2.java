@@ -3,7 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -183,7 +185,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void setPeople(ArrayList<Integer> Dust) {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
-		PTable.setLayout(new GridLayout(0, 20));
+		PTable.setLayout(new GridLayout(0, rl));
 
 		PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
@@ -334,17 +336,26 @@ public class Page2 extends MyPanel implements ActionListener {
 		Random random = new Random();
 		file = chooser.getSelectedFile();
 		try {
+			int sum;
 			Path path = Paths.get(file.getPath());
 			numDust = new ArrayList<Integer>();
-
+			BufferedReader br = new BufferedReader(new FileReader(file));
 			Scanner scanner = new Scanner(path);
+			Scanner scan = new Scanner(br.readLine());
+			while (scan.hasNext()) {
+				if (scan.hasNextInt()) {
+					sum=scan.nextInt();
+					rl++;
+				} else {
+					scan.next();
+				}
+			}
 			while (scanner.hasNext()) {
 				if (scanner.hasNextInt()) {
 					numDust.add(scanner.nextInt());
 					// System.out.print(scanner.nextInt()+" ");
 				} else {
 					scanner.next();
-					rl++;
 					// System.out.println();
 				}
 			}
