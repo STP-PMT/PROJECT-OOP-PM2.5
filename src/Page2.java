@@ -166,30 +166,11 @@ public class Page2 extends MyPanel implements ActionListener {
 		Rain2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int num;
-
 				for (int i = 0; i < numDust.size(); i++) {
 					if (numPeople > 0) {
-						setResult(numPeople, numDust);
-						if (numDust.get(i) - 50 <= 0) {
-							num = 0;
-						} else {
-							num = numDust.get(i) - 50;
-						}
-						setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
-						numDust.remove(i);
-						numDust.add(i, num);
-
+						setButtonColor(i,50);
 					} else {
-						setResult(RNumPeople[i], numDust);
-						if (numDust.get(i) - 50 <= 0) {
-							num = 0;
-						} else {
-							num = numDust.get(i) - 50;
-						}
-						setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
-						numDust.remove(i);
-						numDust.add(i, num);
+						setButtonColor(i,50);
 					}
 				}
 				add(PTable);
@@ -213,7 +194,6 @@ public class Page2 extends MyPanel implements ActionListener {
 			}
 		}
 		add(PTable);
-		// repaint();
 	}
 
 	public void setTableColor(int Dust, JButton Area, JPanel PTable, int sick, int good, int pDust, int numPeople) {
@@ -257,69 +237,69 @@ public class Page2 extends MyPanel implements ActionListener {
 		PTable.add(Area);
 	}
 
-	public void setRain1Color(int i) {
+	public void setButtonColor(int i,int n) {
 		if (numPeople > 0) {
 			int num;
 			setResult(numPeople, numDust);
-			if (numDust.get(i) - 30 <= 0) {
+			if (numDust.get(i) - n <= 0) {
 				num = 0;
 			} else {
-				num = numDust.get(i) - 30;
+				num = numDust.get(i) - n;
 			}
 			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
 			numDust.remove(i);
 			numDust.add(i, num);
-		}else {
+		} else {
 			int num;
 			setResult(numPeople, numDust);
-			if (numDust.get(i) - 30 <= 0) {
+			if (numDust.get(i) - n <= 0) {
 				num = 0;
 			} else {
-				num = numDust.get(i) - 30;
+				num = numDust.get(i) - n;
 			}
 			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
 			numDust.remove(i);
 			numDust.add(i, num);
 		}
-		
+
 	}
 
 	public void Rain1(MouseEvent e) {
-		if(isRain1Click) {
+		if (isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
-				if(e.getSource() == PArea[i]) {
+				if (e.getSource() == PArea[i]) {
 					PArea[i].getLayout();
 					try {
-						if(PArea[i]!= null) {
-							setRain1Color(i);
+						if (PArea[i] != null) {
+							setButtonColor(i,30);
 						}
-						if (PArea[i+1]!=null) {
-							setRain1Color(i+1);
+						if (PArea[i + 1] != null) {
+							setButtonColor(i + 1,30);
 						}
-						if(PArea[i-1]!=null) {
-							setRain1Color(i-1);
+						if (PArea[i - 1] != null) {
+							setButtonColor(i - 1,30);
 						}
-						if(PArea[i+20]!=null) {
-							setRain1Color(i+20);
+						if (PArea[i + 20] != null) {
+							setButtonColor(i + 20,30);
 						}
-						if(PArea[i-20]!=null) {
-							setRain1Color(i-20);
+						if (PArea[i - 20] != null) {
+							setButtonColor(i - 20,30);
 						}
-						if(PArea[i+21]!=null) {
-							setRain1Color(i+21);
+						if (PArea[i + 21] != null) {
+							setButtonColor(i + 21,30);
 						}
-						if(PArea[i-21]!=null) {
-							setRain1Color(i-21);
+						if (PArea[i - 21] != null) {
+							setButtonColor(i - 21,30);
 						}
-						if(PArea[i-19]!=null) {
-							setRain1Color(i-19);
+						if (PArea[i - 19] != null) {
+							setButtonColor(i - 19,30);
 						}
-						if(PArea[i+19]!=null) {
-							setRain1Color(i+19);
+						if (PArea[i + 19] != null) {
+							setButtonColor(i + 19,30);
 						}
 						System.out.println(i);
 					} catch (Exception e2) {
-						
+
 					}
 				}
 			}
@@ -337,20 +317,11 @@ public class Page2 extends MyPanel implements ActionListener {
 		PDetail.add(textArea);
 	}
 
-	public void setTable(ArrayList<Integer> numDust) {
-		setVisible(false);
-		remove(PTable);
-		setPeople(numDust);
-		setVisible(true);
-	}
-
 	public void setSelectFile() {
 		chooser = new JFileChooser();
 		filter = new FileNameExtensionFilter(".txt File", "txt");
-
 		chooser.setFileFilter(filter);
 		returnVal = chooser.showOpenDialog(Page2.this);
-		System.out.println(returnVal);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
 			log.setText(file.getPath());
@@ -363,8 +334,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		Random random = new Random();
 		file = chooser.getSelectedFile();
 		try {
-			String p = file.getPath();
-			Path path = Paths.get(p);
+			Path path = Paths.get(file.getPath());
 			numDust = new ArrayList<Integer>();
 			Scanner scanner = new Scanner(path);
 			while (scanner.hasNext()) {
@@ -414,6 +384,19 @@ public class Page2 extends MyPanel implements ActionListener {
 		}
 	}
 
+	public void setTable(ArrayList<Integer> numDust) {
+		setVisible(false);
+		remove(PTable);
+		setPeople(numDust);
+		setVisible(true);
+	}
+
+	public void setEdit(boolean b) {
+		Population.setEditable(b);
+		Random1.setEditable(b);
+		Random2.setEditable(b);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == SeclectFile) {
@@ -422,9 +405,7 @@ public class Page2 extends MyPanel implements ActionListener {
 			remove(PTable);
 			setTable();
 			setVisible(true);
-			Population.setEditable(true);
-			Random1.setEditable(true);
-			Random2.setEditable(true);
+			setEdit(true);
 			Random1.setText("");
 			Random2.setText("");
 			Population.setText("");
@@ -433,7 +414,6 @@ public class Page2 extends MyPanel implements ActionListener {
 				setNewTable();
 				returnPeople = 0;
 				returnVal = 3;
-			} else {
 			}
 		} else if (e.getSource() == Population_Ok) {
 			if (returnVal == 0 && returnPeople == 0)
@@ -445,9 +425,7 @@ public class Page2 extends MyPanel implements ActionListener {
 						setNewTable();
 						returnPeople = 0;
 						returnVal = 3;
-						Random1.setEditable(false);
-						Random2.setEditable(false);
-						Population.setEditable(false);
+						setEdit(true);
 						Random1.setText("");
 						Random2.setText("");
 					} else {
@@ -455,8 +433,7 @@ public class Page2 extends MyPanel implements ActionListener {
 					}
 
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Input Number");
-					System.err.println("Exception: " + e2.getMessage());
+					JOptionPane.showMessageDialog(null, "Input again!!");
 				}
 		} else if (e.getSource() == Random_Ok) {
 			if (returnVal == 0 && returnPeople == 0) {
@@ -470,16 +447,13 @@ public class Page2 extends MyPanel implements ActionListener {
 						setNewTable();
 						returnPeople = 0;
 						returnVal = 3;
-						Population.setEditable(false);
-						Random1.setEditable(false);
-						Random2.setEditable(false);
+						setEdit(false);
 						Population.setText("");
 					} else {
 						JOptionPane.showMessageDialog(null, "Input again!!");
 					}
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Input Number");
-					System.err.println("Exception: " + e2.getMessage());
+					JOptionPane.showMessageDialog(null, "Input again!!");
 				}
 			}
 		}
