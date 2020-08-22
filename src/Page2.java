@@ -66,7 +66,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void setTable() {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
-		PTable.setLayout(new GridLayout(20, 10));
+		PTable.setLayout(new GridLayout(10, 20));
 		for (int i = 1; i <= 200; i++) {
 			PTable.add(new JButton());
 		}
@@ -274,6 +274,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		if(isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if(e.getSource() == PArea[i]) {
+					PArea[i].getLocation();
 					if(PArea[i]!= null) {
 						setRain1Color(i);
 					}
@@ -301,7 +302,7 @@ public class Page2 extends MyPanel implements ActionListener {
 					if(PArea[i+19]!=null) {
 						setRain1Color(i+19);
 					}
-					System.out.println(i);
+					System.out.println(PArea[i].getLocation()+" "+i);
 					
 				}
 			}
@@ -422,7 +423,7 @@ public class Page2 extends MyPanel implements ActionListener {
 				try {
 					String text = Population.getText();
 					numPeople = Integer.parseInt(text);
-					if (numPeople >= 0) {
+					if (numPeople > 0) {
 						returnPeople = 1;
 						setNewTable();
 						returnPeople = 0;
