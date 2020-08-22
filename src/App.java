@@ -51,10 +51,13 @@ public class App {
 			}
 		});
 
-		frame.addWindowListener(new WindowAdapter() {
+		frame.addWindowListener(new WindowAdapter() 
+		{
 			@Override
-			public void windowClosing(WindowEvent e) {
-				if (p == 2 || p == 3) {
+			public void windowClosing(WindowEvent e) 
+			{
+				if (p == 2 || p == 3) 
+				{
 					cardLayout.show(frame.getContentPane(), "page1");
 					p = 0;
 				} else {
