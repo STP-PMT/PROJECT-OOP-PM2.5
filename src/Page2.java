@@ -23,7 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Page2 extends MyPanel implements ActionListener {
-	int rl = 0;
+	int column = 0;
+	int row = 1;
 
 	private static final long serialVersionUID = 1L;
 	private JPanel PTable;
@@ -185,7 +186,7 @@ public class Page2 extends MyPanel implements ActionListener {
 	public void setPeople(ArrayList<Integer> Dust) {
 		setPanel(20, 20, 588, 450, 39, 54, 73);
 		PTable = getPanel();
-		PTable.setLayout(new GridLayout(0, rl));
+		PTable.setLayout(new GridLayout(row, column));
 
 		PArea = new JButton[Dust.size()];
 		for (int i = 0; i < Dust.size(); i++) {
@@ -271,37 +272,33 @@ public class Page2 extends MyPanel implements ActionListener {
 		if (isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if (e.getSource() == PArea[i]) {
-					try {
-						if (PArea[i] != null) {
-							setButtonColor(i, 30);
-						}
-						if (PArea[i + 1] != null) {
-							setButtonColor(i + 1, 30);
-						}
-						if (PArea[i - 1] != null) {
-							setButtonColor(i - 1, 30);
-						}
-						if (PArea[i + 20] != null) {
-							setButtonColor(i + 20, 30);
-						}
-						if (PArea[i - 20] != null) {
-							setButtonColor(i - 20, 30);
-						}
-						if (PArea[i + 21] != null) {
-							setButtonColor(i + 21, 30);
-						}
-						if (PArea[i - 21] != null) {
-							setButtonColor(i - 21, 30);
-						}
-						if (PArea[i - 19] != null) {
-							setButtonColor(i - 19, 30);
-						}
-						if (PArea[i + 19] != null) {
-							setButtonColor(i + 19, 30);
-						}
-						System.out.println(i);
-					} catch (Exception e2) {
 
+					if (PArea[i] != null) {
+						setButtonColor(i, 30);
+					}
+					if (PArea[i + 1] != null) {
+						setButtonColor(i + 1, 30);
+					}
+					if (PArea[i - 1] != null) {
+						setButtonColor(i - 1, 30);
+					}
+					if (PArea[i + column] != null) {
+						setButtonColor(i + column, 30);
+					}
+					if (PArea[i - column] != null) {
+						setButtonColor(i - column, 30);
+					}
+					if (PArea[i + column+1] != null) {
+						setButtonColor(i + column+1, 30);
+					}
+					if (PArea[i - column+1] != null) {
+						setButtonColor(i - column+1, 30);
+					}
+					if (PArea[i - column-1] != null) {
+						setButtonColor(i - column-1, 30);
+					}
+					if (PArea[i + column-1] != null) {
+						setButtonColor(i + column-1, 30);
 					}
 				}
 			}
@@ -344,12 +341,19 @@ public class Page2 extends MyPanel implements ActionListener {
 			Scanner scan = new Scanner(br.readLine());
 			while (scan.hasNext()) {
 				if (scan.hasNextInt()) {
-					sum=scan.nextInt();
-					rl++;
+					sum = scan.nextInt();
+					column++;
 				} else {
 					scan.next();
 				}
 			}
+
+			String st;
+			while ((st = br.readLine()) != null) {
+				row++;
+			}
+			System.out.println(row);
+
 			while (scanner.hasNext()) {
 				if (scanner.hasNextInt()) {
 					numDust.add(scanner.nextInt());
@@ -423,6 +427,8 @@ public class Page2 extends MyPanel implements ActionListener {
 			Random1.setText("");
 			Random2.setText("");
 			Population.setText("");
+			column = 0;
+			row = 1;
 		} else if (e.getSource() == SeclectFile_OK) {
 			if (returnVal == 0 && returnPeople == 1) {
 				setNewTable();
@@ -439,7 +445,7 @@ public class Page2 extends MyPanel implements ActionListener {
 						setNewTable();
 						returnPeople = 0;
 						returnVal = 3;
-						setEdit(true);
+						setEdit(false);
 						Random1.setText("");
 						Random2.setText("");
 					} else {
