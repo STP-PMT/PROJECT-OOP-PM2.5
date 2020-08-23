@@ -272,7 +272,6 @@ public class Page2 extends MyPanel implements ActionListener {
 		if (isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if (e.getSource() == PArea[i]) {
-
 					if (PArea[i] != null) {
 						setButtonColor(i, 30);
 					}
