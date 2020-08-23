@@ -255,7 +255,7 @@ public class Page2 extends MyPanel implements ActionListener {
 			numDust.add(i, num);
 		} else {
 			int num;
-			setResult(numPeople, numDust);
+			setResult(RNumPeople[i], numDust);
 			if (numDust.get(i) - n <= 0) {
 				num = 0;
 			} else {
