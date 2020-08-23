@@ -428,6 +428,7 @@ public class Page2 extends MyPanel implements ActionListener {
 			Random2.setText("");
 			Population.setText("");
 			column = 0;
+			numPeople = 0;
 			row = 1;
 		} else if (e.getSource() == SeclectFile_OK) {
 			if (returnVal == 0 && returnPeople == 1) {
