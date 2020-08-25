@@ -316,8 +316,8 @@ public class Page2 extends MyPanel implements ActionListener {
 		PDetail.remove(pic1);
 		PDetail.remove(textArea);
 		setTextAarea(15, 15, 340, 200,
-				"Population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust + "\nGood health\t\t  : " + good
-						+ "\nSick\t\t  : " + sick + "\nPercentage of population sick\t  : " + pDust + " %");
+				"Population\t\t  : " + numPeople + "\nDust volume\t\t  : " + Dust + "\nHealthy population\t  : " + good
+						+ "\nSick population\t\t  : " + sick + "\nPercentage of population sick\t  : " + pDust + " %");
 		textArea = getTextArea();
 		textArea.setEditable(false);
 		textArea.setBackground(color);
