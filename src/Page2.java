@@ -216,9 +216,9 @@ public class Page2 extends MyPanel implements ActionListener {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (start >= 0 && end > 0 && start != end && start < end) {
-					setDetailPeople(numPeople, Dust, sick, good, pDust);
+					setDetailPeople(numPeople, Dust, sick, good, pDust,Area.getBackground());
 				} else {
-					setDetailPeople(numPeople, Dust, sick, good, pDust);
+					setDetailPeople(numPeople, Dust, sick, good, pDust,Area.getBackground());
 				}
 				repaint();
 			}
@@ -304,7 +304,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		}
 	}
 
-	public void setDetailPeople(int numPeople, int Dust, int sick, int good, int pDust) {
+	public void setDetailPeople(int numPeople, int Dust, int sick, int good, int pDust,Color color) {
 		PDetail.remove(pic1);
 		PDetail.remove(textArea);
 		setTextAarea(15, 15, 340, 200,
@@ -312,6 +312,7 @@ public class Page2 extends MyPanel implements ActionListener {
 						+ "\nSick\t\t  : " + sick + "\nPercentage of population sick\t  : " + pDust + " %");
 		textArea = getTextArea();
 		textArea.setEditable(false);
+		textArea.setBackground(color);
 		PDetail.add(textArea);
 	}
 
@@ -356,10 +357,8 @@ public class Page2 extends MyPanel implements ActionListener {
 			while (scanner.hasNext()) {
 				if (scanner.hasNextInt()) {
 					numDust.add(scanner.nextInt());
-					// System.out.print(scanner.nextInt()+" ");
 				} else {
 					scanner.next();
-					// System.out.println();
 				}
 			}
 			scanner.close();
