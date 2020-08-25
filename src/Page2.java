@@ -210,15 +210,15 @@ public class Page2 extends MyPanel implements ActionListener {
 		} else if (Dust > 150 && Dust <= 250) {
 			Area.setBackground(new Color(255, 64, 0));
 		} else {
-			Area.setBackground(new Color(0, 204, 0));
+			Area.setBackground(new Color(255, 255, 255));
 		}
 		Area.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (start >= 0 && end > 0 && start != end && start < end) {
-					setDetailPeople(numPeople, Dust, sick, good, pDust,Area.getBackground());
+					setDetailPeople(numPeople, Dust, sick, good, pDust, Area.getBackground());
 				} else {
-					setDetailPeople(numPeople, Dust, sick, good, pDust,Area.getBackground());
+					setDetailPeople(numPeople, Dust, sick, good, pDust, Area.getBackground());
 				}
 				repaint();
 			}
@@ -241,70 +241,78 @@ public class Page2 extends MyPanel implements ActionListener {
 		PTable.add(Area);
 	}
 
-	public void setButtonColor(int i, int n) {
-		if (numPeople > 0) {
-			int num;
+	public void setButtonColor(int i, double n) {
+		if (numPeople > 0 && numDust.get(i) > 0) {
+			int num=0;
+			if (numDust.get(i) - n <= 0) {
+				num = 0;
+			} else {
+				num = (int) (numDust.get(i) - n);
+			}
+			numDust.remove(i);
+			numDust.add(i, num);
 			setResult(numPeople, numDust);
-			if (numDust.get(i) - n <= 0) {
-				num = 0;
-			} else {
-				num = numDust.get(i) - n;
-			}
 			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
-			numDust.remove(i);
-			numDust.add(i, num);
-		} else {
-			int num;
-			setResult(RNumPeople[i], numDust);
+		
+			System.out.println(num);
+		} else if (numDust.get(i) > 0) {
+			int num=0;
 			if (numDust.get(i) - n <= 0) {
 				num = 0;
 			} else {
-				num = numDust.get(i) - n;
+				num = (int) (numDust.get(i) - n);
 			}
-			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
 			numDust.remove(i);
 			numDust.add(i, num);
+			setResult(RNumPeople[i], numDust);
+			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
+			
+			System.out.println(num);
 		}
-
 	}
 
 	public void Rain1(MouseEvent e) {
 		if (isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if (e.getSource() == PArea[i]) {
-					if (PArea[i] != null) {
-						setButtonColor(i, 30);
+					try {
+						if (PArea[i] != null) {
+							setButtonColor(i, numDust.get(i) * 0.5);
+						}
+						if (PArea[i + 1] != null) {
+							setButtonColor(i + 1, numDust.get(i + 1) * 0.3);
+						}
+						if (PArea[i - 1] != null) {
+							setButtonColor(i - 1, numDust.get(i - 1) * 0.3);
+						}
+						if (PArea[i + column] != null) {
+							setButtonColor(i + column, numDust.get(i + column) * 0.3);
+						}
+						if (PArea[i - column] != null) {
+							setButtonColor(i - column, numDust.get(i - column) * 0.3);
+						}
+						if (PArea[i + column + 1] != null) {
+							setButtonColor(i + column + 1, numDust.get(i + column + 1) * 0.3);
+						}
+						if (PArea[i - column + 1] != null) {
+							setButtonColor(i - column + 1, numDust.get(i - column + 1) * 0.3);
+						}
+						if (PArea[i - column - 1] != null) {
+							setButtonColor(i - column - 1, numDust.get(i - column - 1) * 0.3);
+						}
+						if (PArea[i + column - 1] != null) {
+							setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
+						}
+					} catch (Exception e2) {
+						
 					}
-					if (PArea[i + 1] != null) {
-						setButtonColor(i + 1, 30);
-					}
-					if (PArea[i - 1] != null) {
-						setButtonColor(i - 1, 30);
-					}
-					if (PArea[i + column] != null) {
-						setButtonColor(i + column, 30);
-					}
-					if (PArea[i - column] != null) {
-						setButtonColor(i - column, 30);
-					}
-					if (PArea[i + column+1] != null) {
-						setButtonColor(i + column+1, 30);
-					}
-					if (PArea[i - column+1] != null) {
-						setButtonColor(i - column+1, 30);
-					}
-					if (PArea[i - column-1] != null) {
-						setButtonColor(i - column-1, 30);
-					}
-					if (PArea[i + column-1] != null) {
-						setButtonColor(i + column-1, 30);
-					}
+					
 				}
 			}
 		}
 	}
 
-	public void setDetailPeople(int numPeople, int Dust, int sick, int good, int pDust,Color color) {
+	public void setDetailPeople(int numPeople, int Dust, int sick, int good, int pDust, Color color) {
 		PDetail.remove(pic1);
 		PDetail.remove(textArea);
 		setTextAarea(15, 15, 340, 200,
