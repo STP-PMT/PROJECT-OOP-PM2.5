@@ -15,7 +15,7 @@ public class MyFrame extends JFrame {
 
     public MyFrame() {
         setSize(X_WIDTH, Y_HIGTH);
-        setTitle("PM 2.5");
+        setTitle("PM2.5 Simulation");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLayout(null);
