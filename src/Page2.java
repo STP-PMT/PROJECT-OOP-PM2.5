@@ -270,38 +270,45 @@ public class Page2 extends MyPanel implements ActionListener {
 	}
 
 	public void Rain1(MouseEvent e) {
-		int[] result = new int[numDust.size()];
-		for (int j = 1; j <= row; j++) {
-			result[j] = j * column - 1;
-			// System.out.println(result[j]);
+		int[] result = new int[row];
+		result[0]=19;
+		for (int j = 1; j <row; j++) {
+			result[j] = (j+1) * column - 1;
 		}
 
-		int[] result2 = new int[numDust.size()];
-		for (int k = 1; k <= row; k++) {
-			result2[k] = k * column + 1;
-			System.out.println(result2[k]);
+		int[] result2 = new int[row];
+		result2[0] = 0;
+		for (int k = 1; k < row; k++) {
+			result2[k] = k * column;
 		}
-		int a = 0;
+		int a = 1;
 		int b = 0;
+		int c = 0;
+		System.out.println(result.length);
+		System.out.println(result2.length);
 		if (isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if (e.getSource() == PArea[i]) {
+					System.out.println(i);
 					for (int j = 0; j < result.length; j++) {
-						if (i != result[j]) {
-							b++;
-						} else {
-							b = 0;
-						}
-					}
-
-					for (int k = 0; k < result2.length; k++) {
-						if (i != result2[k]) {
-							a++;
-						} else {
+						if (i == result[j] && i == result2[j]) {
 							a = 0;
+							break;
+						} else if (i == result[j]) {
+							b++;
+							a = 0;
+							break;
+						} else if (i == result2[j]) {
+							c++;
+							a = 0;
+							break;
 						}
 					}
-					if (b == result.length && a == result2.length) {
+					System.out.println("A :" + a);
+					System.out.println("B :" + b);
+					System.out.println("C :" + c);
+
+					if (a == 1) {
 						if (i >= 0 && i < numDust.size()) {
 							setButtonColor(i, numDust.get(i) * 0.5);
 						}
@@ -329,7 +336,7 @@ public class Page2 extends MyPanel implements ActionListener {
 						if (i + column - 1 >= 0 && i + column - 1 < numDust.size()) {
 							setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
 						}
-					} else if (b != result.length ) {
+					} else if (b > 0) {
 						if (i >= 0 && i < numDust.size()) {
 							setButtonColor(i, numDust.get(i) * 0.5);
 						}
@@ -349,7 +356,7 @@ public class Page2 extends MyPanel implements ActionListener {
 							setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
 						}
 
-					} else if (a != result2.length) {
+					} else if (c > 0) {
 						if (i >= 0 && i < numDust.size()) {
 							setButtonColor(i, numDust.get(i) * 0.5);
 						}
@@ -368,6 +375,7 @@ public class Page2 extends MyPanel implements ActionListener {
 						if (i - column + 1 >= 0 && i - column + 1 < numDust.size()) {
 							setButtonColor(i - column + 1, numDust.get(i - column + 1) * 0.3);
 						}
+
 					}
 				}
 			}
