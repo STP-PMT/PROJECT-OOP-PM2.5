@@ -243,7 +243,7 @@ public class Page2 extends MyPanel implements ActionListener {
 
 	public void setButtonColor(int i, double n) {
 		if (numPeople > 0 && numDust.get(i) > 0) {
-			int num=0;
+			int num = 0;
 			if (numDust.get(i) - n <= 0) {
 				num = 0;
 			} else {
@@ -253,10 +253,9 @@ public class Page2 extends MyPanel implements ActionListener {
 			numDust.add(i, num);
 			setResult(numPeople, numDust);
 			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], numPeople);
-		
-			System.out.println(num);
+
 		} else if (numDust.get(i) > 0) {
-			int num=0;
+			int num = 0;
 			if (numDust.get(i) - n <= 0) {
 				num = 0;
 			} else {
@@ -266,47 +265,110 @@ public class Page2 extends MyPanel implements ActionListener {
 			numDust.add(i, num);
 			setResult(RNumPeople[i], numDust);
 			setTableColor(num, PArea[i], PTable, sick[i], good[i], pDust[i], RNumPeople[i]);
-			
-			System.out.println(num);
+
 		}
 	}
 
 	public void Rain1(MouseEvent e) {
+		int[] result = new int[numDust.size()];
+		for (int j = 1; j <= row; j++) {
+			result[j] = j * column - 1;
+			// System.out.println(result[j]);
+		}
+
+		int[] result2 = new int[numDust.size()];
+		for (int k = 1; k <= row; k++) {
+			result2[k] = k * column + 1;
+			System.out.println(result2[k]);
+		}
+		int a = 0;
+		int b = 0;
 		if (isRain1Click) {
 			for (int i = 0; i < PArea.length; i++) {
 				if (e.getSource() == PArea[i]) {
-					try {
-						if (PArea[i] != null) {
+					for (int j = 0; j < result.length; j++) {
+						if (i != result[j]) {
+							b++;
+						} else {
+							b = 0;
+						}
+					}
+
+					for (int k = 0; k < result2.length; k++) {
+						if (i != result2[k]) {
+							a++;
+						} else {
+							a = 0;
+						}
+					}
+					if (b == result.length && a == result2.length) {
+						if (i >= 0 && i < numDust.size()) {
 							setButtonColor(i, numDust.get(i) * 0.5);
 						}
-						if (PArea[i + 1] != null) {
+						if (i + 1 >= 0 && i + 1 < numDust.size()) {
 							setButtonColor(i + 1, numDust.get(i + 1) * 0.3);
 						}
-						if (PArea[i - 1] != null) {
+						if (i - 1 >= 0 && i - 1 < numDust.size()) {
 							setButtonColor(i - 1, numDust.get(i - 1) * 0.3);
 						}
-						if (PArea[i + column] != null) {
+						if (i + column >= 0 && i + column < numDust.size()) {
 							setButtonColor(i + column, numDust.get(i + column) * 0.3);
 						}
-						if (PArea[i - column] != null) {
+						if (i - column >= 0 && i - column < numDust.size()) {
 							setButtonColor(i - column, numDust.get(i - column) * 0.3);
 						}
-						if (PArea[i + column + 1] != null) {
+						if (i + column + 1 >= 0 && i + column + 1 < numDust.size()) {
 							setButtonColor(i + column + 1, numDust.get(i + column + 1) * 0.3);
 						}
-						if (PArea[i - column + 1] != null) {
+						if (i - column + 1 >= 0 && i - column + 1 < numDust.size()) {
 							setButtonColor(i - column + 1, numDust.get(i - column + 1) * 0.3);
 						}
-						if (PArea[i - column - 1] != null) {
+						if (i - column - 1 >= 0 && i - column - 1 < numDust.size()) {
 							setButtonColor(i - column - 1, numDust.get(i - column - 1) * 0.3);
 						}
-						if (PArea[i + column - 1] != null) {
+						if (i + column - 1 >= 0 && i + column - 1 < numDust.size()) {
 							setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
 						}
-					} catch (Exception e2) {
-						
+					} else if (b != result.length ) {
+						if (i >= 0 && i < numDust.size()) {
+							setButtonColor(i, numDust.get(i) * 0.5);
+						}
+						if (i - 1 >= 0 && i - 1 < numDust.size()) {
+							setButtonColor(i - 1, numDust.get(i - 1) * 0.3);
+						}
+						if (i + column >= 0 && i + column < numDust.size()) {
+							setButtonColor(i + column, numDust.get(i + column) * 0.3);
+						}
+						if (i - column >= 0 && i - column < numDust.size()) {
+							setButtonColor(i - column, numDust.get(i - column) * 0.3);
+						}
+						if (i - column - 1 >= 0 && i - column - 1 < numDust.size()) {
+							setButtonColor(i - column - 1, numDust.get(i - column - 1) * 0.3);
+						}
+						if (i + column - 1 >= 0 && i + column - 1 < numDust.size()) {
+							setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
+						}
+
+					} else if (a != result2.length) {
+						if (i >= 0 && i < numDust.size()) {
+							setButtonColor(i, numDust.get(i) * 0.5);
+						}
+						if (i + 1 >= 0 && i + 1 < numDust.size()) {
+							setButtonColor(i + 1, numDust.get(i + 1) * 0.3);
+						}
+						if (i + column >= 0 && i + column < numDust.size()) {
+							setButtonColor(i + column, numDust.get(i + column) * 0.3);
+						}
+						if (i - column >= 0 && i - column < numDust.size()) {
+							setButtonColor(i - column, numDust.get(i - column) * 0.3);
+						}
+						if (i + column + 1 >= 0 && i + column + 1 < numDust.size()) {
+							setButtonColor(i + column + 1, numDust.get(i + column + 1) * 0.3);
+						}
+						if (i - column + 1 >= 0 && i - column + 1 < numDust.size()) {
+							setButtonColor(i - column + 1, numDust.get(i - column + 1) * 0.3);
+						}
 					}
-					
 				}
 			}
 		}
@@ -360,7 +422,6 @@ public class Page2 extends MyPanel implements ActionListener {
 			while ((st = br.readLine()) != null) {
 				row++;
 			}
-			System.out.println(row);
 
 			while (scanner.hasNext()) {
 				if (scanner.hasNextInt()) {
