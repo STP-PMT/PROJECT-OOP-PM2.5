@@ -271,7 +271,7 @@ public class Page2 extends MyPanel implements ActionListener {
 
 	public void Rain1(MouseEvent e) {
 		int[] result = new int[row];
-		result[0]=19;
+		result[0]=column-1;
 		for (int j = 1; j <row; j++) {
 			result[j] = (j+1) * column - 1;
 		}

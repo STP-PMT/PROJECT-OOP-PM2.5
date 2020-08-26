@@ -19,7 +19,7 @@ public class MyFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLayout(null);
-        setResizable(true);
+        setResizable(false);
         setMinimumSize(new Dimension(X_WIDTH,Y_HIGTH));
         getContentPane().setBackground(new Color(39, 54, 73));
         setIcon();
