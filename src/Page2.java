@@ -271,9 +271,9 @@ public class Page2 extends MyPanel implements ActionListener {
 
 	public void Rain1(MouseEvent e) {
 		int[] result = new int[row];
-		result[0]=column-1;
-		for (int j = 1; j <row; j++) {
-			result[j] = (j+1) * column - 1;
+		result[0] = column - 1;
+		for (int j = 1; j < row; j++) {
+			result[j] = (j + 1) * column - 1;
 		}
 
 		int[] result2 = new int[row];
@@ -304,81 +304,68 @@ public class Page2 extends MyPanel implements ActionListener {
 							break;
 						}
 					}
-					System.out.println("A :" + a);
-					System.out.println("B :" + b);
-					System.out.println("C :" + c);
-
 					if (a == 1) {
+						
 						if (i >= 0 && i < numDust.size()) {
 							setButtonColor(i, numDust.get(i) * 0.5);
 						}
-						if (i + 1 >= 0 && i + 1 < numDust.size()) {
-							setButtonColor(i + 1, numDust.get(i + 1) * 0.3);
-						}
-						if (i - 1 >= 0 && i - 1 < numDust.size()) {
-							setButtonColor(i - 1, numDust.get(i - 1) * 0.3);
-						}
 						if (i + column >= 0 && i + column < numDust.size()) {
-							setButtonColor(i + column, numDust.get(i + column) * 0.3);
+							setButtonColor(i + column, numDust.get(i + column) *0.3);
 						}
 						if (i - column >= 0 && i - column < numDust.size()) {
 							setButtonColor(i - column, numDust.get(i - column) * 0.3);
 						}
-						if (i + column + 1 >= 0 && i + column + 1 < numDust.size()) {
-							setButtonColor(i + column + 1, numDust.get(i + column + 1) * 0.3);
-						}
-						if (i - column + 1 >= 0 && i - column + 1 < numDust.size()) {
-							setButtonColor(i - column + 1, numDust.get(i - column + 1) * 0.3);
-						}
-						if (i - column - 1 >= 0 && i - column - 1 < numDust.size()) {
-							setButtonColor(i - column - 1, numDust.get(i - column - 1) * 0.3);
-						}
-						if (i + column - 1 >= 0 && i + column - 1 < numDust.size()) {
-							setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
-						}
+						setLeft(i);
+						setRight(i);
 					} else if (b > 0) {
 						if (i >= 0 && i < numDust.size()) {
 							setButtonColor(i, numDust.get(i) * 0.5);
 						}
-						if (i - 1 >= 0 && i - 1 < numDust.size()) {
-							setButtonColor(i - 1, numDust.get(i - 1) * 0.3);
-						}
 						if (i + column >= 0 && i + column < numDust.size()) {
-							setButtonColor(i + column, numDust.get(i + column) * 0.3);
+							setButtonColor(i + column, numDust.get(i + column) *0.3);
 						}
 						if (i - column >= 0 && i - column < numDust.size()) {
 							setButtonColor(i - column, numDust.get(i - column) * 0.3);
 						}
-						if (i - column - 1 >= 0 && i - column - 1 < numDust.size()) {
-							setButtonColor(i - column - 1, numDust.get(i - column - 1) * 0.3);
-						}
-						if (i + column - 1 >= 0 && i + column - 1 < numDust.size()) {
-							setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
-						}
-
+						setLeft(i);
 					} else if (c > 0) {
 						if (i >= 0 && i < numDust.size()) {
 							setButtonColor(i, numDust.get(i) * 0.5);
 						}
-						if (i + 1 >= 0 && i + 1 < numDust.size()) {
-							setButtonColor(i + 1, numDust.get(i + 1) * 0.3);
-						}
 						if (i + column >= 0 && i + column < numDust.size()) {
-							setButtonColor(i + column, numDust.get(i + column) * 0.3);
+							setButtonColor(i + column, numDust.get(i + column) *0.3);
 						}
 						if (i - column >= 0 && i - column < numDust.size()) {
 							setButtonColor(i - column, numDust.get(i - column) * 0.3);
 						}
-						if (i + column + 1 >= 0 && i + column + 1 < numDust.size()) {
-							setButtonColor(i + column + 1, numDust.get(i + column + 1) * 0.3);
-						}
-						if (i - column + 1 >= 0 && i - column + 1 < numDust.size()) {
-							setButtonColor(i - column + 1, numDust.get(i - column + 1) * 0.3);
-						}
-
+						setRight(i);
 					}
 				}
 			}
+		}
+	}
+
+	public void setLeft(int i) {
+		if (i - 1 >= 0 && i - 1 < numDust.size()) {
+			setButtonColor(i - 1, numDust.get(i - 1) * 0.3);
+		}
+		if (i - column - 1 >= 0 && i - column - 1 < numDust.size()) {
+			setButtonColor(i - column - 1, numDust.get(i - column - 1) * 0.3);
+		}
+		if (i + column - 1 >= 0 && i + column - 1 < numDust.size()) {
+			setButtonColor(i + column - 1, numDust.get(i + column - 1) * 0.3);
+		}
+	}
+
+	public void setRight(int i) {
+		if (i + 1 >= 0 && i + 1 < numDust.size()) {
+			setButtonColor(i + 1, numDust.get(i + 1) * 0.3);
+		}
+		if (i + column + 1 >= 0 && i + column + 1 < numDust.size()) {
+			setButtonColor(i + column + 1, numDust.get(i + column + 1) * 0.3);
+		}
+		if (i - column + 1 >= 0 && i - column + 1 < numDust.size()) {
+			setButtonColor(i - column + 1, numDust.get(i - column + 1) * 0.3);
 		}
 	}
 
