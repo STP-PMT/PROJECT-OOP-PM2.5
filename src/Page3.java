@@ -2,7 +2,8 @@ import javax.swing.JButton;
 
 public class Page3 extends MyPanel 
 {
-	static JButton  BHome;	
+    private static final long serialVersionUID = 1L;
+    static JButton BHome;
 	
 	
     Page3(){
