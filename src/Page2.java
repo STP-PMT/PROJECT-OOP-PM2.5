@@ -148,10 +148,12 @@ public class Page2 extends MyPanel implements ActionListener {
 
 		setButton(15, 15, 166, 140, "Artificial rain", 15);
 		Rain1 = getButton();
+		Rain1.setBackground(new Color(255, 255, 255));
 		panel.add(Rain1);
 
 		setButton(190, 15, 166, 140, "Natural rain", 15);
 		Rain2 = getButton();
+		Rain2.setBackground(new Color(255, 255, 255));
 		panel.add(Rain2);
 
 		Rain1.addActionListener(new ActionListener() {
