@@ -91,12 +91,12 @@ public class Page2 extends MyPanel implements ActionListener {
 		log = getTextFeild();
 		log.setEditable(false);
 		PInputFile.add(log);
-		setButton(435, 15, 80, 30, "SELECT");
+		setButton(435, 15, 138, 30, "SELECT");
 		SeclectFile = getButton();
 		PInputFile.add(SeclectFile);
-		setButton(518, 15, 55, 30, "OK");
-		SeclectFile_OK = getButton();
-		PInputFile.add(SeclectFile_OK);
+		// setButton(518, 15, 55, 30, "OK");
+		// SeclectFile_OK = getButton();
+		// PInputFile.add(SeclectFile_OK);
 
 		setTextFeild(105, 55, 325, 30);
 		Population = getTextFeild();
@@ -120,7 +120,7 @@ public class Page2 extends MyPanel implements ActionListener {
 		PInputFile.add(Random_Ok);
 
 		SeclectFile.addActionListener(this);
-		SeclectFile_OK.addActionListener(this);
+		//SeclectFile_OK.addActionListener(this);
 		Population_Ok.addActionListener(this);
 		Random_Ok.addActionListener(this);
 		add(PInputFile);
